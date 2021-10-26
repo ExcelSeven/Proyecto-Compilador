@@ -1,20 +1,11 @@
 import ply.yacc as yacc     # Import PLU yacc module
 import Lexer                # Import my lexer information
+
 tokens = Lexer.tokens
-
-# Set-up of operator precendence
-precedence = (
-    ('left','PLUS','MINUS'),
-    ('left','TIMES','DIVIDE'),
-    ('right','UMINUS'),
-    )
-
-# Dictionary of names
-names = { }
 
 # Formal Grammar
 def p_program_structure(p):
-    '''program_structure : PROGRAM NAME SEMI declare_var full_fun MAIN LPAREN RPAREN LCURLY statutes RCURLY'''
+    '''program_structure : PROGRAM ID SEMI declare_var functions MAIN LPAREN RPAREN LCURLY statutes RCURLY'''
 
 def p_type(p):
     '''type : INT
@@ -25,20 +16,21 @@ def p_declare_var(p):
     '''declare_var : VARS type COLON multivars SEMI'''
 
 def p_multivars(p):
-    '''multivars : NAME 
-                 | NAME COMMA multivars
+    '''multivars : ID 
+                 | ID COMMA multivars
                  | dimvars
                  | dimvars COMMA multivars'''
 
 def p_dimvars(p):
-    '''dimvars : NAME dimensions'''
+    '''dimvars : ID dimensions'''
 
 def p_dimensions(p):
     '''dimensions : LBRACK expr RBRACK
                   | LBRACK expr RBRACK dimensions'''
 
 def p_declare_fun(p):
-    '''declare_fun : FUNCTION return_type NAME LPAREN type COLON multivars RPAREN'''
+    '''declare_fun : FUNCTION return_type ID LPAREN RPAREN
+                   | FUNCTION return_type ID LPAREN params RPAREN'''
 
 def p_return_type(p):
     '''return_type : INT
@@ -46,15 +38,15 @@ def p_return_type(p):
                     | CHAR
                     | VOID'''
 
-def p_full_fun(p):
-    '''full_fun : declare_fun declare_var LCURLY statutes RCURLY
-                | declare_fun declare_var LCURLY statutes RCURLY full_fun'''
+def p_functions(p):
+    '''functions : declare_fun declare_var LCURLY statutes RCURLY
+                 | declare_fun declare_var LCURLY statutes RCURLY functions'''
 
 def p_statutes(p):
     '''statutes : assign
                 | assign statutes
-                | call
-                | call statutes
+                | call_void
+                | call_void statutes
                 | returning
                 | reading
                 | reading statutes
@@ -67,15 +59,16 @@ def p_statutes(p):
                 | nonconditional
                 | nonconditional statutes'''
 
-def p_param(p):
-    '''param : type COLON NAME
-             | type COLON NAME COMMA param'''
+def p_params(p):
+    '''params : type COLON multivars
+              | type COLON multivars SEMI params'''
 
 def p_assign(p):
-    '''assign : NAME EQUALS expr'''
+    '''assign : ID EQUALS expr SEMI
+              | dimvars EQUALS expr SEMI'''
 
-def p_call(p):
-    '''call : NAME LPAREN exprs RPAREN'''
+def p_call_void(p):
+    '''call_void : ID LPAREN exprs RPAREN SEMI'''
 
 def p_returning(p):
     '''returning : RETURN LPAREN expr RPAREN SEMI'''
@@ -88,18 +81,31 @@ def p_writing(p):
 
 def p_write_opt(p):
     '''write_opt : QUOTE MESSAGE QUOTE
-                 | QUOTE MESSAGE QUOTE write_opt
+                 | QUOTE MESSAGE QUOTE COMMA write_opt
                  | exprs
-                 | exprs write_opt'''
+                 | exprs COMMA write_opt'''
 
 def p_decision(p):
-    '''decision : IF LPAREN expr RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY'''
+    '''decision : IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY 
+                | IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY'''
 
 def p_conditional(p):
-    '''conditional : WHILE LPAREN expr RPAREN DO LCURLY statutes SEMI RCURLY'''
+    '''conditional : WHILE LPAREN logic RPAREN DO LCURLY statutes SEMI RCURLY'''
 
 def p_nonconditional(p):
     '''nonconditional : FOR expr EQUALS expr TO expr DO LCURLY statutes SEMI RCURLY'''
+
+def p_relation(p):
+    '''relation : expr GREATER expr
+                | expr GREATER_EQ expr
+                | expr LESSER expr
+                | expr LESSER_EQ expr
+                | expr COMPARE expr'''
+
+def p_logic(p):
+    '''logic : relation AND relation
+             | relation OR relation
+             | relation'''
 
 def p_exprs(p):
     '''exprs : expr
@@ -116,9 +122,13 @@ def p_term(p):
             | factor'''
 
 def p_factor(p):
-    '''factor : NUMBER
-              | NAME
+    '''factor : C_INT
+              | MINUS C_INT
+              | C_FLOAT
+              | MINUS C_FLOAT
+              | C_CHAR
+              | ID
               | dimvars
-              | NAME LPAREN exprs RPAREN'''
+              | ID LPAREN exprs RPAREN'''
 
-yacc.yacc()
+parser = yacc.yacc()

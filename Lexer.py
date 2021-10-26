@@ -2,28 +2,28 @@ import ply.lex as lex   # Import PLY lex module
 
 # List of reserved words
 reserved = {
-    'PROGRAM'   : 'PROGRAM', 
-    'MAIN'      : 'MAIN', 
-    'VARS'      : 'VARS', 
-    'INT'       : 'INT', 
-    'FLOAT'     : 'FLOAT', 
-    'CHAR'      : 'CHAR', 
-    'VOID'      : 'VOID', 
-    'FUNCTION'  : 'FUNCTION', 
-    'RETURN'    : 'RETURN', 
-    'READ'      : 'READ', 
-    'WRITE'     : 'WRITE', 
-    'IF'        : 'IF', 
-    'THEN'      : 'THEN', 
-    'ELSE'      : 'ELSE', 
-    'WHILE'     : 'WHILE', 
-    'DO'        : 'DO', 
-    'FOR'       : 'FOR', 
-    'TO'        : 'TO'
+    'program'   : 'PROGRAM', 
+    'main'      : 'MAIN', 
+    'vars'      : 'VARS', 
+    'int'       : 'INT', 
+    'float'     : 'FLOAT', 
+    'char'      : 'CHAR', 
+    'void'      : 'VOID', 
+    'function'  : 'FUNCTION', 
+    'return'    : 'RETURN', 
+    'read'      : 'READ', 
+    'write'     : 'WRITE', 
+    'if'        : 'IF', 
+    'then'      : 'THEN', 
+    'else'      : 'ELSE', 
+    'while'     : 'WHILE', 
+    'do'        : 'DO', 
+    'for'       : 'FOR', 
+    'to'        : 'TO'
 }
 
 # List of tokens
-tokens = ['PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'EQUALS', 'COMPARE', 'AND', 'OR', 'LESSER', 'GREATER', 'LPAREN', 'RPAREN', 'LCURLY', 
+tokens = ['PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'EQUALS', 'COMPARE', 'DIFFERENT', 'AND', 'OR', 'LESSER', 'GREATER', 'LPAREN', 'RPAREN', 'LCURLY', 
          'RCURLY', 'LBRACK', 'RBRACK', 'SEMI', 'COLON', 'COMMA', 'QUOTE', 'LESSER_EQ', 'GREATER_EQ', 'ID', 'C_INT', 'C_FLOAT', 'C_CHAR', 'MESSAGE']
 
 tokens = tokens + list(reserved.values())
@@ -35,6 +35,7 @@ t_TIMES      = r'\*'
 t_DIVIDE     = r'\/'
 t_EQUALS     = r'='
 t_COMPARE    = r'=='
+t_DIFFERENT  = r"!="
 t_AND        = r'\&'
 t_OR         = r'\|'
 t_LESSER     = r'<'
@@ -66,7 +67,7 @@ def t_C_INT(t):
     r'[0-9]+'
     return t
 
-def t_C_CHAR(t):
+def t_CHAR(t):
     r'[a-zA-Z]'
     return t
 
@@ -95,7 +96,7 @@ data = '''
  3 + 4 * 10
    + -20.3
    word = "hello haha anyway 328763872"
-   character = a
+   char character = a
  '''
  
 # Give the lexer some input

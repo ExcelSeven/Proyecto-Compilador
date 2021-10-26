@@ -100,7 +100,8 @@ def p_relation(p):
                 | expr GREATER_EQ expr
                 | expr LESSER expr
                 | expr LESSER_EQ expr
-                | expr COMPARE expr'''
+                | expr COMPARE expr
+                | expr DIFFERENT expr'''
 
 def p_logic(p):
     '''logic : relation AND relation

@@ -1,0 +1,3299 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program_structure
+Rule 1     program_structure -> PROGRAM ID SEMI declare_var functions MAIN LPAREN RPAREN LCURLY statutes RCURLY
+Rule 2     type -> INT
+Rule 3     type -> FLOAT
+Rule 4     type -> CHAR
+Rule 5     declare_var -> VARS type COLON multivars SEMI
+Rule 6     multivars -> ID
+Rule 7     multivars -> ID COMMA multivars
+Rule 8     multivars -> dimvars
+Rule 9     multivars -> dimvars COMMA multivars
+Rule 10    dimvars -> ID dimensions
+Rule 11    dimensions -> LBRACK expr RBRACK
+Rule 12    dimensions -> LBRACK expr RBRACK dimensions
+Rule 13    declare_fun -> FUNCTION return_type ID LPAREN RPAREN
+Rule 14    declare_fun -> FUNCTION return_type ID LPAREN params RPAREN
+Rule 15    return_type -> INT
+Rule 16    return_type -> FLOAT
+Rule 17    return_type -> CHAR
+Rule 18    return_type -> VOID
+Rule 19    functions -> declare_fun declare_var LCURLY statutes RCURLY
+Rule 20    functions -> declare_fun declare_var LCURLY statutes RCURLY functions
+Rule 21    statutes -> assign
+Rule 22    statutes -> assign statutes
+Rule 23    statutes -> call_void
+Rule 24    statutes -> call_void statutes
+Rule 25    statutes -> returning
+Rule 26    statutes -> reading
+Rule 27    statutes -> reading statutes
+Rule 28    statutes -> writing
+Rule 29    statutes -> writing statutes
+Rule 30    statutes -> decision
+Rule 31    statutes -> decision statutes
+Rule 32    statutes -> conditional
+Rule 33    statutes -> conditional statutes
+Rule 34    statutes -> nonconditional
+Rule 35    statutes -> nonconditional statutes
+Rule 36    params -> type COLON multivars
+Rule 37    params -> type COLON multivars SEMI params
+Rule 38    assign -> ID EQUALS expr SEMI
+Rule 39    assign -> dimvars EQUALS expr SEMI
+Rule 40    call_void -> ID LPAREN exprs RPAREN SEMI
+Rule 41    returning -> RETURN LPAREN expr RPAREN SEMI
+Rule 42    reading -> READ LPAREN multivars RPAREN SEMI
+Rule 43    writing -> WRITE LPAREN write_opt RPAREN SEMI
+Rule 44    write_opt -> QUOTE MESSAGE QUOTE
+Rule 45    write_opt -> QUOTE MESSAGE QUOTE COMMA write_opt
+Rule 46    write_opt -> exprs
+Rule 47    write_opt -> exprs COMMA write_opt
+Rule 48    decision -> IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY
+Rule 49    decision -> IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY
+Rule 50    conditional -> WHILE LPAREN logic RPAREN DO LCURLY statutes SEMI RCURLY
+Rule 51    nonconditional -> FOR expr EQUALS expr TO expr DO LCURLY statutes SEMI RCURLY
+Rule 52    relation -> expr GREATER expr
+Rule 53    relation -> expr GREATER_EQ expr
+Rule 54    relation -> expr LESSER expr
+Rule 55    relation -> expr LESSER_EQ expr
+Rule 56    relation -> expr COMPARE expr
+Rule 57    relation -> expr DIFFERENT expr
+Rule 58    logic -> relation AND relation
+Rule 59    logic -> relation OR relation
+Rule 60    logic -> relation
+Rule 61    exprs -> expr
+Rule 62    exprs -> expr COMMA exprs
+Rule 63    expr -> expr PLUS term
+Rule 64    expr -> expr MINUS term
+Rule 65    expr -> term
+Rule 66    term -> term TIMES factor
+Rule 67    term -> term DIVIDE factor
+Rule 68    term -> factor
+Rule 69    factor -> C_INT
+Rule 70    factor -> MINUS C_INT
+Rule 71    factor -> C_FLOAT
+Rule 72    factor -> MINUS C_FLOAT
+Rule 73    factor -> C_CHAR
+Rule 74    factor -> ID
+Rule 75    factor -> dimvars
+Rule 76    factor -> ID LPAREN exprs RPAREN
+
+Terminals, with rules where they appear
+
+AND                  : 58
+CHAR                 : 4 17
+COLON                : 5 36 37
+COMMA                : 7 9 45 47 62
+COMPARE              : 56
+C_CHAR               : 73
+C_FLOAT              : 71 72
+C_INT                : 69 70
+DIFFERENT            : 57
+DIVIDE               : 67
+DO                   : 50 51
+ELSE                 : 49
+EQUALS               : 38 39 51
+FLOAT                : 3 16
+FOR                  : 51
+FUNCTION             : 13 14
+GREATER              : 52
+GREATER_EQ           : 53
+ID                   : 1 6 7 10 13 14 38 40 74 76
+IF                   : 48 49
+INT                  : 2 15
+LBRACK               : 11 12
+LCURLY               : 1 19 20 48 49 49 50 51
+LESSER               : 54
+LESSER_EQ            : 55
+LPAREN               : 1 13 14 40 41 42 43 48 49 50 76
+MAIN                 : 1
+MESSAGE              : 44 45
+MINUS                : 64 70 72
+OR                   : 59
+PLUS                 : 63
+PROGRAM              : 1
+QUOTE                : 44 44 45 45
+RBRACK               : 11 12
+RCURLY               : 1 19 20 48 49 49 50 51
+READ                 : 42
+RETURN               : 41
+RPAREN               : 1 13 14 40 41 42 43 48 49 50 76
+SEMI                 : 1 5 37 38 39 40 41 42 43 48 49 49 50 51
+THEN                 : 48 49
+TIMES                : 66
+TO                   : 51
+VARS                 : 5
+VOID                 : 18
+WHILE                : 50
+WRITE                : 43
+error                : 
+
+Nonterminals, with rules where they appear
+
+assign               : 21 22
+call_void            : 23 24
+conditional          : 32 33
+decision             : 30 31
+declare_fun          : 19 20
+declare_var          : 1 19 20
+dimensions           : 10 12
+dimvars              : 8 9 39 75
+expr                 : 11 12 38 39 41 51 51 51 52 52 53 53 54 54 55 55 56 56 57 57 61 62 63 64
+exprs                : 40 46 47 62 76
+factor               : 66 67 68
+functions            : 1 20
+logic                : 48 49 50
+multivars            : 5 7 9 36 37 42
+nonconditional       : 34 35
+params               : 14 37
+program_structure    : 0
+reading              : 26 27
+relation             : 58 58 59 59 60
+return_type          : 13 14
+returning            : 25
+statutes             : 1 19 20 22 24 27 29 31 33 35 48 49 49 50 51
+term                 : 63 64 65 66 67
+type                 : 5 36 37
+write_opt            : 43 45 47
+writing              : 28 29
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program_structure
+    (1) program_structure -> . PROGRAM ID SEMI declare_var functions MAIN LPAREN RPAREN LCURLY statutes RCURLY
+
+    PROGRAM         shift and go to state 2
+
+    program_structure              shift and go to state 1
+
+state 1
+
+    (0) S' -> program_structure .
+
+
+
+state 2
+
+    (1) program_structure -> PROGRAM . ID SEMI declare_var functions MAIN LPAREN RPAREN LCURLY statutes RCURLY
+
+    ID              shift and go to state 3
+
+
+state 3
+
+    (1) program_structure -> PROGRAM ID . SEMI declare_var functions MAIN LPAREN RPAREN LCURLY statutes RCURLY
+
+    SEMI            shift and go to state 4
+
+
+state 4
+
+    (1) program_structure -> PROGRAM ID SEMI . declare_var functions MAIN LPAREN RPAREN LCURLY statutes RCURLY
+    (5) declare_var -> . VARS type COLON multivars SEMI
+
+    VARS            shift and go to state 6
+
+    declare_var                    shift and go to state 5
+
+state 5
+
+    (1) program_structure -> PROGRAM ID SEMI declare_var . functions MAIN LPAREN RPAREN LCURLY statutes RCURLY
+    (19) functions -> . declare_fun declare_var LCURLY statutes RCURLY
+    (20) functions -> . declare_fun declare_var LCURLY statutes RCURLY functions
+    (13) declare_fun -> . FUNCTION return_type ID LPAREN RPAREN
+    (14) declare_fun -> . FUNCTION return_type ID LPAREN params RPAREN
+
+    FUNCTION        shift and go to state 9
+
+    functions                      shift and go to state 7
+    declare_fun                    shift and go to state 8
+
+state 6
+
+    (5) declare_var -> VARS . type COLON multivars SEMI
+    (2) type -> . INT
+    (3) type -> . FLOAT
+    (4) type -> . CHAR
+
+    INT             shift and go to state 11
+    FLOAT           shift and go to state 12
+    CHAR            shift and go to state 13
+
+    type                           shift and go to state 10
+
+state 7
+
+    (1) program_structure -> PROGRAM ID SEMI declare_var functions . MAIN LPAREN RPAREN LCURLY statutes RCURLY
+
+    MAIN            shift and go to state 14
+
+
+state 8
+
+    (19) functions -> declare_fun . declare_var LCURLY statutes RCURLY
+    (20) functions -> declare_fun . declare_var LCURLY statutes RCURLY functions
+    (5) declare_var -> . VARS type COLON multivars SEMI
+
+    VARS            shift and go to state 6
+
+    declare_var                    shift and go to state 15
+
+state 9
+
+    (13) declare_fun -> FUNCTION . return_type ID LPAREN RPAREN
+    (14) declare_fun -> FUNCTION . return_type ID LPAREN params RPAREN
+    (15) return_type -> . INT
+    (16) return_type -> . FLOAT
+    (17) return_type -> . CHAR
+    (18) return_type -> . VOID
+
+    INT             shift and go to state 17
+    FLOAT           shift and go to state 18
+    CHAR            shift and go to state 19
+    VOID            shift and go to state 20
+
+    return_type                    shift and go to state 16
+
+state 10
+
+    (5) declare_var -> VARS type . COLON multivars SEMI
+
+    COLON           shift and go to state 21
+
+
+state 11
+
+    (2) type -> INT .
+
+    COLON           reduce using rule 2 (type -> INT .)
+
+
+state 12
+
+    (3) type -> FLOAT .
+
+    COLON           reduce using rule 3 (type -> FLOAT .)
+
+
+state 13
+
+    (4) type -> CHAR .
+
+    COLON           reduce using rule 4 (type -> CHAR .)
+
+
+state 14
+
+    (1) program_structure -> PROGRAM ID SEMI declare_var functions MAIN . LPAREN RPAREN LCURLY statutes RCURLY
+
+    LPAREN          shift and go to state 22
+
+
+state 15
+
+    (19) functions -> declare_fun declare_var . LCURLY statutes RCURLY
+    (20) functions -> declare_fun declare_var . LCURLY statutes RCURLY functions
+
+    LCURLY          shift and go to state 23
+
+
+state 16
+
+    (13) declare_fun -> FUNCTION return_type . ID LPAREN RPAREN
+    (14) declare_fun -> FUNCTION return_type . ID LPAREN params RPAREN
+
+    ID              shift and go to state 24
+
+
+state 17
+
+    (15) return_type -> INT .
+
+    ID              reduce using rule 15 (return_type -> INT .)
+
+
+state 18
+
+    (16) return_type -> FLOAT .
+
+    ID              reduce using rule 16 (return_type -> FLOAT .)
+
+
+state 19
+
+    (17) return_type -> CHAR .
+
+    ID              reduce using rule 17 (return_type -> CHAR .)
+
+
+state 20
+
+    (18) return_type -> VOID .
+
+    ID              reduce using rule 18 (return_type -> VOID .)
+
+
+state 21
+
+    (5) declare_var -> VARS type COLON . multivars SEMI
+    (6) multivars -> . ID
+    (7) multivars -> . ID COMMA multivars
+    (8) multivars -> . dimvars
+    (9) multivars -> . dimvars COMMA multivars
+    (10) dimvars -> . ID dimensions
+
+    ID              shift and go to state 26
+
+    multivars                      shift and go to state 25
+    dimvars                        shift and go to state 27
+
+state 22
+
+    (1) program_structure -> PROGRAM ID SEMI declare_var functions MAIN LPAREN . RPAREN LCURLY statutes RCURLY
+
+    RPAREN          shift and go to state 28
+
+
+state 23
+
+    (19) functions -> declare_fun declare_var LCURLY . statutes RCURLY
+    (20) functions -> declare_fun declare_var LCURLY . statutes RCURLY functions
+    (21) statutes -> . assign
+    (22) statutes -> . assign statutes
+    (23) statutes -> . call_void
+    (24) statutes -> . call_void statutes
+    (25) statutes -> . returning
+    (26) statutes -> . reading
+    (27) statutes -> . reading statutes
+    (28) statutes -> . writing
+    (29) statutes -> . writing statutes
+    (30) statutes -> . decision
+    (31) statutes -> . decision statutes
+    (32) statutes -> . conditional
+    (33) statutes -> . conditional statutes
+    (34) statutes -> . nonconditional
+    (35) statutes -> . nonconditional statutes
+    (38) assign -> . ID EQUALS expr SEMI
+    (39) assign -> . dimvars EQUALS expr SEMI
+    (40) call_void -> . ID LPAREN exprs RPAREN SEMI
+    (41) returning -> . RETURN LPAREN expr RPAREN SEMI
+    (42) reading -> . READ LPAREN multivars RPAREN SEMI
+    (43) writing -> . WRITE LPAREN write_opt RPAREN SEMI
+    (48) decision -> . IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY
+    (49) decision -> . IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY
+    (50) conditional -> . WHILE LPAREN logic RPAREN DO LCURLY statutes SEMI RCURLY
+    (51) nonconditional -> . FOR expr EQUALS expr TO expr DO LCURLY statutes SEMI RCURLY
+    (10) dimvars -> . ID dimensions
+
+    ID              shift and go to state 38
+    RETURN          shift and go to state 40
+    READ            shift and go to state 41
+    WRITE           shift and go to state 42
+    IF              shift and go to state 43
+    WHILE           shift and go to state 44
+    FOR             shift and go to state 45
+
+    statutes                       shift and go to state 29
+    assign                         shift and go to state 30
+    call_void                      shift and go to state 31
+    returning                      shift and go to state 32
+    reading                        shift and go to state 33
+    writing                        shift and go to state 34
+    decision                       shift and go to state 35
+    conditional                    shift and go to state 36
+    nonconditional                 shift and go to state 37
+    dimvars                        shift and go to state 39
+
+state 24
+
+    (13) declare_fun -> FUNCTION return_type ID . LPAREN RPAREN
+    (14) declare_fun -> FUNCTION return_type ID . LPAREN params RPAREN
+
+    LPAREN          shift and go to state 46
+
+
+state 25
+
+    (5) declare_var -> VARS type COLON multivars . SEMI
+
+    SEMI            shift and go to state 47
+
+
+state 26
+
+    (6) multivars -> ID .
+    (7) multivars -> ID . COMMA multivars
+    (10) dimvars -> ID . dimensions
+    (11) dimensions -> . LBRACK expr RBRACK
+    (12) dimensions -> . LBRACK expr RBRACK dimensions
+
+    SEMI            reduce using rule 6 (multivars -> ID .)
+    RPAREN          reduce using rule 6 (multivars -> ID .)
+    COMMA           shift and go to state 48
+    LBRACK          shift and go to state 50
+
+    dimensions                     shift and go to state 49
+
+state 27
+
+    (8) multivars -> dimvars .
+    (9) multivars -> dimvars . COMMA multivars
+
+    SEMI            reduce using rule 8 (multivars -> dimvars .)
+    RPAREN          reduce using rule 8 (multivars -> dimvars .)
+    COMMA           shift and go to state 51
+
+
+state 28
+
+    (1) program_structure -> PROGRAM ID SEMI declare_var functions MAIN LPAREN RPAREN . LCURLY statutes RCURLY
+
+    LCURLY          shift and go to state 52
+
+
+state 29
+
+    (19) functions -> declare_fun declare_var LCURLY statutes . RCURLY
+    (20) functions -> declare_fun declare_var LCURLY statutes . RCURLY functions
+
+    RCURLY          shift and go to state 53
+
+
+state 30
+
+    (21) statutes -> assign .
+    (22) statutes -> assign . statutes
+    (21) statutes -> . assign
+    (22) statutes -> . assign statutes
+    (23) statutes -> . call_void
+    (24) statutes -> . call_void statutes
+    (25) statutes -> . returning
+    (26) statutes -> . reading
+    (27) statutes -> . reading statutes
+    (28) statutes -> . writing
+    (29) statutes -> . writing statutes
+    (30) statutes -> . decision
+    (31) statutes -> . decision statutes
+    (32) statutes -> . conditional
+    (33) statutes -> . conditional statutes
+    (34) statutes -> . nonconditional
+    (35) statutes -> . nonconditional statutes
+    (38) assign -> . ID EQUALS expr SEMI
+    (39) assign -> . dimvars EQUALS expr SEMI
+    (40) call_void -> . ID LPAREN exprs RPAREN SEMI
+    (41) returning -> . RETURN LPAREN expr RPAREN SEMI
+    (42) reading -> . READ LPAREN multivars RPAREN SEMI
+    (43) writing -> . WRITE LPAREN write_opt RPAREN SEMI
+    (48) decision -> . IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY
+    (49) decision -> . IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY
+    (50) conditional -> . WHILE LPAREN logic RPAREN DO LCURLY statutes SEMI RCURLY
+    (51) nonconditional -> . FOR expr EQUALS expr TO expr DO LCURLY statutes SEMI RCURLY
+    (10) dimvars -> . ID dimensions
+
+    RCURLY          reduce using rule 21 (statutes -> assign .)
+    SEMI            reduce using rule 21 (statutes -> assign .)
+    ID              shift and go to state 38
+    RETURN          shift and go to state 40
+    READ            shift and go to state 41
+    WRITE           shift and go to state 42
+    IF              shift and go to state 43
+    WHILE           shift and go to state 44
+    FOR             shift and go to state 45
+
+    assign                         shift and go to state 30
+    statutes                       shift and go to state 54
+    call_void                      shift and go to state 31
+    returning                      shift and go to state 32
+    reading                        shift and go to state 33
+    writing                        shift and go to state 34
+    decision                       shift and go to state 35
+    conditional                    shift and go to state 36
+    nonconditional                 shift and go to state 37
+    dimvars                        shift and go to state 39
+
+state 31
+
+    (23) statutes -> call_void .
+    (24) statutes -> call_void . statutes
+    (21) statutes -> . assign
+    (22) statutes -> . assign statutes
+    (23) statutes -> . call_void
+    (24) statutes -> . call_void statutes
+    (25) statutes -> . returning
+    (26) statutes -> . reading
+    (27) statutes -> . reading statutes
+    (28) statutes -> . writing
+    (29) statutes -> . writing statutes
+    (30) statutes -> . decision
+    (31) statutes -> . decision statutes
+    (32) statutes -> . conditional
+    (33) statutes -> . conditional statutes
+    (34) statutes -> . nonconditional
+    (35) statutes -> . nonconditional statutes
+    (38) assign -> . ID EQUALS expr SEMI
+    (39) assign -> . dimvars EQUALS expr SEMI
+    (40) call_void -> . ID LPAREN exprs RPAREN SEMI
+    (41) returning -> . RETURN LPAREN expr RPAREN SEMI
+    (42) reading -> . READ LPAREN multivars RPAREN SEMI
+    (43) writing -> . WRITE LPAREN write_opt RPAREN SEMI
+    (48) decision -> . IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY
+    (49) decision -> . IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY
+    (50) conditional -> . WHILE LPAREN logic RPAREN DO LCURLY statutes SEMI RCURLY
+    (51) nonconditional -> . FOR expr EQUALS expr TO expr DO LCURLY statutes SEMI RCURLY
+    (10) dimvars -> . ID dimensions
+
+    RCURLY          reduce using rule 23 (statutes -> call_void .)
+    SEMI            reduce using rule 23 (statutes -> call_void .)
+    ID              shift and go to state 38
+    RETURN          shift and go to state 40
+    READ            shift and go to state 41
+    WRITE           shift and go to state 42
+    IF              shift and go to state 43
+    WHILE           shift and go to state 44
+    FOR             shift and go to state 45
+
+    call_void                      shift and go to state 31
+    statutes                       shift and go to state 55
+    assign                         shift and go to state 30
+    returning                      shift and go to state 32
+    reading                        shift and go to state 33
+    writing                        shift and go to state 34
+    decision                       shift and go to state 35
+    conditional                    shift and go to state 36
+    nonconditional                 shift and go to state 37
+    dimvars                        shift and go to state 39
+
+state 32
+
+    (25) statutes -> returning .
+
+    RCURLY          reduce using rule 25 (statutes -> returning .)
+    SEMI            reduce using rule 25 (statutes -> returning .)
+
+
+state 33
+
+    (26) statutes -> reading .
+    (27) statutes -> reading . statutes
+    (21) statutes -> . assign
+    (22) statutes -> . assign statutes
+    (23) statutes -> . call_void
+    (24) statutes -> . call_void statutes
+    (25) statutes -> . returning
+    (26) statutes -> . reading
+    (27) statutes -> . reading statutes
+    (28) statutes -> . writing
+    (29) statutes -> . writing statutes
+    (30) statutes -> . decision
+    (31) statutes -> . decision statutes
+    (32) statutes -> . conditional
+    (33) statutes -> . conditional statutes
+    (34) statutes -> . nonconditional
+    (35) statutes -> . nonconditional statutes
+    (38) assign -> . ID EQUALS expr SEMI
+    (39) assign -> . dimvars EQUALS expr SEMI
+    (40) call_void -> . ID LPAREN exprs RPAREN SEMI
+    (41) returning -> . RETURN LPAREN expr RPAREN SEMI
+    (42) reading -> . READ LPAREN multivars RPAREN SEMI
+    (43) writing -> . WRITE LPAREN write_opt RPAREN SEMI
+    (48) decision -> . IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY
+    (49) decision -> . IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY
+    (50) conditional -> . WHILE LPAREN logic RPAREN DO LCURLY statutes SEMI RCURLY
+    (51) nonconditional -> . FOR expr EQUALS expr TO expr DO LCURLY statutes SEMI RCURLY
+    (10) dimvars -> . ID dimensions
+
+    RCURLY          reduce using rule 26 (statutes -> reading .)
+    SEMI            reduce using rule 26 (statutes -> reading .)
+    ID              shift and go to state 38
+    RETURN          shift and go to state 40
+    READ            shift and go to state 41
+    WRITE           shift and go to state 42
+    IF              shift and go to state 43
+    WHILE           shift and go to state 44
+    FOR             shift and go to state 45
+
+    reading                        shift and go to state 33
+    statutes                       shift and go to state 56
+    assign                         shift and go to state 30
+    call_void                      shift and go to state 31
+    returning                      shift and go to state 32
+    writing                        shift and go to state 34
+    decision                       shift and go to state 35
+    conditional                    shift and go to state 36
+    nonconditional                 shift and go to state 37
+    dimvars                        shift and go to state 39
+
+state 34
+
+    (28) statutes -> writing .
+    (29) statutes -> writing . statutes
+    (21) statutes -> . assign
+    (22) statutes -> . assign statutes
+    (23) statutes -> . call_void
+    (24) statutes -> . call_void statutes
+    (25) statutes -> . returning
+    (26) statutes -> . reading
+    (27) statutes -> . reading statutes
+    (28) statutes -> . writing
+    (29) statutes -> . writing statutes
+    (30) statutes -> . decision
+    (31) statutes -> . decision statutes
+    (32) statutes -> . conditional
+    (33) statutes -> . conditional statutes
+    (34) statutes -> . nonconditional
+    (35) statutes -> . nonconditional statutes
+    (38) assign -> . ID EQUALS expr SEMI
+    (39) assign -> . dimvars EQUALS expr SEMI
+    (40) call_void -> . ID LPAREN exprs RPAREN SEMI
+    (41) returning -> . RETURN LPAREN expr RPAREN SEMI
+    (42) reading -> . READ LPAREN multivars RPAREN SEMI
+    (43) writing -> . WRITE LPAREN write_opt RPAREN SEMI
+    (48) decision -> . IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY
+    (49) decision -> . IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY
+    (50) conditional -> . WHILE LPAREN logic RPAREN DO LCURLY statutes SEMI RCURLY
+    (51) nonconditional -> . FOR expr EQUALS expr TO expr DO LCURLY statutes SEMI RCURLY
+    (10) dimvars -> . ID dimensions
+
+    RCURLY          reduce using rule 28 (statutes -> writing .)
+    SEMI            reduce using rule 28 (statutes -> writing .)
+    ID              shift and go to state 38
+    RETURN          shift and go to state 40
+    READ            shift and go to state 41
+    WRITE           shift and go to state 42
+    IF              shift and go to state 43
+    WHILE           shift and go to state 44
+    FOR             shift and go to state 45
+
+    writing                        shift and go to state 34
+    statutes                       shift and go to state 57
+    assign                         shift and go to state 30
+    call_void                      shift and go to state 31
+    returning                      shift and go to state 32
+    reading                        shift and go to state 33
+    decision                       shift and go to state 35
+    conditional                    shift and go to state 36
+    nonconditional                 shift and go to state 37
+    dimvars                        shift and go to state 39
+
+state 35
+
+    (30) statutes -> decision .
+    (31) statutes -> decision . statutes
+    (21) statutes -> . assign
+    (22) statutes -> . assign statutes
+    (23) statutes -> . call_void
+    (24) statutes -> . call_void statutes
+    (25) statutes -> . returning
+    (26) statutes -> . reading
+    (27) statutes -> . reading statutes
+    (28) statutes -> . writing
+    (29) statutes -> . writing statutes
+    (30) statutes -> . decision
+    (31) statutes -> . decision statutes
+    (32) statutes -> . conditional
+    (33) statutes -> . conditional statutes
+    (34) statutes -> . nonconditional
+    (35) statutes -> . nonconditional statutes
+    (38) assign -> . ID EQUALS expr SEMI
+    (39) assign -> . dimvars EQUALS expr SEMI
+    (40) call_void -> . ID LPAREN exprs RPAREN SEMI
+    (41) returning -> . RETURN LPAREN expr RPAREN SEMI
+    (42) reading -> . READ LPAREN multivars RPAREN SEMI
+    (43) writing -> . WRITE LPAREN write_opt RPAREN SEMI
+    (48) decision -> . IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY
+    (49) decision -> . IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY
+    (50) conditional -> . WHILE LPAREN logic RPAREN DO LCURLY statutes SEMI RCURLY
+    (51) nonconditional -> . FOR expr EQUALS expr TO expr DO LCURLY statutes SEMI RCURLY
+    (10) dimvars -> . ID dimensions
+
+    RCURLY          reduce using rule 30 (statutes -> decision .)
+    SEMI            reduce using rule 30 (statutes -> decision .)
+    ID              shift and go to state 38
+    RETURN          shift and go to state 40
+    READ            shift and go to state 41
+    WRITE           shift and go to state 42
+    IF              shift and go to state 43
+    WHILE           shift and go to state 44
+    FOR             shift and go to state 45
+
+    decision                       shift and go to state 35
+    statutes                       shift and go to state 58
+    assign                         shift and go to state 30
+    call_void                      shift and go to state 31
+    returning                      shift and go to state 32
+    reading                        shift and go to state 33
+    writing                        shift and go to state 34
+    conditional                    shift and go to state 36
+    nonconditional                 shift and go to state 37
+    dimvars                        shift and go to state 39
+
+state 36
+
+    (32) statutes -> conditional .
+    (33) statutes -> conditional . statutes
+    (21) statutes -> . assign
+    (22) statutes -> . assign statutes
+    (23) statutes -> . call_void
+    (24) statutes -> . call_void statutes
+    (25) statutes -> . returning
+    (26) statutes -> . reading
+    (27) statutes -> . reading statutes
+    (28) statutes -> . writing
+    (29) statutes -> . writing statutes
+    (30) statutes -> . decision
+    (31) statutes -> . decision statutes
+    (32) statutes -> . conditional
+    (33) statutes -> . conditional statutes
+    (34) statutes -> . nonconditional
+    (35) statutes -> . nonconditional statutes
+    (38) assign -> . ID EQUALS expr SEMI
+    (39) assign -> . dimvars EQUALS expr SEMI
+    (40) call_void -> . ID LPAREN exprs RPAREN SEMI
+    (41) returning -> . RETURN LPAREN expr RPAREN SEMI
+    (42) reading -> . READ LPAREN multivars RPAREN SEMI
+    (43) writing -> . WRITE LPAREN write_opt RPAREN SEMI
+    (48) decision -> . IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY
+    (49) decision -> . IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY
+    (50) conditional -> . WHILE LPAREN logic RPAREN DO LCURLY statutes SEMI RCURLY
+    (51) nonconditional -> . FOR expr EQUALS expr TO expr DO LCURLY statutes SEMI RCURLY
+    (10) dimvars -> . ID dimensions
+
+    RCURLY          reduce using rule 32 (statutes -> conditional .)
+    SEMI            reduce using rule 32 (statutes -> conditional .)
+    ID              shift and go to state 38
+    RETURN          shift and go to state 40
+    READ            shift and go to state 41
+    WRITE           shift and go to state 42
+    IF              shift and go to state 43
+    WHILE           shift and go to state 44
+    FOR             shift and go to state 45
+
+    conditional                    shift and go to state 36
+    statutes                       shift and go to state 59
+    assign                         shift and go to state 30
+    call_void                      shift and go to state 31
+    returning                      shift and go to state 32
+    reading                        shift and go to state 33
+    writing                        shift and go to state 34
+    decision                       shift and go to state 35
+    nonconditional                 shift and go to state 37
+    dimvars                        shift and go to state 39
+
+state 37
+
+    (34) statutes -> nonconditional .
+    (35) statutes -> nonconditional . statutes
+    (21) statutes -> . assign
+    (22) statutes -> . assign statutes
+    (23) statutes -> . call_void
+    (24) statutes -> . call_void statutes
+    (25) statutes -> . returning
+    (26) statutes -> . reading
+    (27) statutes -> . reading statutes
+    (28) statutes -> . writing
+    (29) statutes -> . writing statutes
+    (30) statutes -> . decision
+    (31) statutes -> . decision statutes
+    (32) statutes -> . conditional
+    (33) statutes -> . conditional statutes
+    (34) statutes -> . nonconditional
+    (35) statutes -> . nonconditional statutes
+    (38) assign -> . ID EQUALS expr SEMI
+    (39) assign -> . dimvars EQUALS expr SEMI
+    (40) call_void -> . ID LPAREN exprs RPAREN SEMI
+    (41) returning -> . RETURN LPAREN expr RPAREN SEMI
+    (42) reading -> . READ LPAREN multivars RPAREN SEMI
+    (43) writing -> . WRITE LPAREN write_opt RPAREN SEMI
+    (48) decision -> . IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY
+    (49) decision -> . IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY
+    (50) conditional -> . WHILE LPAREN logic RPAREN DO LCURLY statutes SEMI RCURLY
+    (51) nonconditional -> . FOR expr EQUALS expr TO expr DO LCURLY statutes SEMI RCURLY
+    (10) dimvars -> . ID dimensions
+
+    RCURLY          reduce using rule 34 (statutes -> nonconditional .)
+    SEMI            reduce using rule 34 (statutes -> nonconditional .)
+    ID              shift and go to state 38
+    RETURN          shift and go to state 40
+    READ            shift and go to state 41
+    WRITE           shift and go to state 42
+    IF              shift and go to state 43
+    WHILE           shift and go to state 44
+    FOR             shift and go to state 45
+
+    nonconditional                 shift and go to state 37
+    statutes                       shift and go to state 60
+    assign                         shift and go to state 30
+    call_void                      shift and go to state 31
+    returning                      shift and go to state 32
+    reading                        shift and go to state 33
+    writing                        shift and go to state 34
+    decision                       shift and go to state 35
+    conditional                    shift and go to state 36
+    dimvars                        shift and go to state 39
+
+state 38
+
+    (38) assign -> ID . EQUALS expr SEMI
+    (40) call_void -> ID . LPAREN exprs RPAREN SEMI
+    (10) dimvars -> ID . dimensions
+    (11) dimensions -> . LBRACK expr RBRACK
+    (12) dimensions -> . LBRACK expr RBRACK dimensions
+
+    EQUALS          shift and go to state 61
+    LPAREN          shift and go to state 62
+    LBRACK          shift and go to state 50
+
+    dimensions                     shift and go to state 49
+
+state 39
+
+    (39) assign -> dimvars . EQUALS expr SEMI
+
+    EQUALS          shift and go to state 63
+
+
+state 40
+
+    (41) returning -> RETURN . LPAREN expr RPAREN SEMI
+
+    LPAREN          shift and go to state 64
+
+
+state 41
+
+    (42) reading -> READ . LPAREN multivars RPAREN SEMI
+
+    LPAREN          shift and go to state 65
+
+
+state 42
+
+    (43) writing -> WRITE . LPAREN write_opt RPAREN SEMI
+
+    LPAREN          shift and go to state 66
+
+
+state 43
+
+    (48) decision -> IF . LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY
+    (49) decision -> IF . LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY
+
+    LPAREN          shift and go to state 67
+
+
+state 44
+
+    (50) conditional -> WHILE . LPAREN logic RPAREN DO LCURLY statutes SEMI RCURLY
+
+    LPAREN          shift and go to state 68
+
+
+state 45
+
+    (51) nonconditional -> FOR . expr EQUALS expr TO expr DO LCURLY statutes SEMI RCURLY
+    (63) expr -> . expr PLUS term
+    (64) expr -> . expr MINUS term
+    (65) expr -> . term
+    (66) term -> . term TIMES factor
+    (67) term -> . term DIVIDE factor
+    (68) term -> . factor
+    (69) factor -> . C_INT
+    (70) factor -> . MINUS C_INT
+    (71) factor -> . C_FLOAT
+    (72) factor -> . MINUS C_FLOAT
+    (73) factor -> . C_CHAR
+    (74) factor -> . ID
+    (75) factor -> . dimvars
+    (76) factor -> . ID LPAREN exprs RPAREN
+    (10) dimvars -> . ID dimensions
+
+    C_INT           shift and go to state 73
+    MINUS           shift and go to state 71
+    C_FLOAT         shift and go to state 74
+    C_CHAR          shift and go to state 75
+    ID              shift and go to state 76
+
+    expr                           shift and go to state 69
+    term                           shift and go to state 70
+    factor                         shift and go to state 72
+    dimvars                        shift and go to state 77
+
+state 46
+
+    (13) declare_fun -> FUNCTION return_type ID LPAREN . RPAREN
+    (14) declare_fun -> FUNCTION return_type ID LPAREN . params RPAREN
+    (36) params -> . type COLON multivars
+    (37) params -> . type COLON multivars SEMI params
+    (2) type -> . INT
+    (3) type -> . FLOAT
+    (4) type -> . CHAR
+
+    RPAREN          shift and go to state 78
+    INT             shift and go to state 11
+    FLOAT           shift and go to state 12
+    CHAR            shift and go to state 13
+
+    params                         shift and go to state 79
+    type                           shift and go to state 80
+
+state 47
+
+    (5) declare_var -> VARS type COLON multivars SEMI .
+
+    FUNCTION        reduce using rule 5 (declare_var -> VARS type COLON multivars SEMI .)
+    LCURLY          reduce using rule 5 (declare_var -> VARS type COLON multivars SEMI .)
+
+
+state 48
+
+    (7) multivars -> ID COMMA . multivars
+    (6) multivars -> . ID
+    (7) multivars -> . ID COMMA multivars
+    (8) multivars -> . dimvars
+    (9) multivars -> . dimvars COMMA multivars
+    (10) dimvars -> . ID dimensions
+
+    ID              shift and go to state 26
+
+    multivars                      shift and go to state 81
+    dimvars                        shift and go to state 27
+
+state 49
+
+    (10) dimvars -> ID dimensions .
+
+    COMMA           reduce using rule 10 (dimvars -> ID dimensions .)
+    SEMI            reduce using rule 10 (dimvars -> ID dimensions .)
+    EQUALS          reduce using rule 10 (dimvars -> ID dimensions .)
+    TIMES           reduce using rule 10 (dimvars -> ID dimensions .)
+    DIVIDE          reduce using rule 10 (dimvars -> ID dimensions .)
+    PLUS            reduce using rule 10 (dimvars -> ID dimensions .)
+    MINUS           reduce using rule 10 (dimvars -> ID dimensions .)
+    RPAREN          reduce using rule 10 (dimvars -> ID dimensions .)
+    RBRACK          reduce using rule 10 (dimvars -> ID dimensions .)
+    GREATER         reduce using rule 10 (dimvars -> ID dimensions .)
+    GREATER_EQ      reduce using rule 10 (dimvars -> ID dimensions .)
+    LESSER          reduce using rule 10 (dimvars -> ID dimensions .)
+    LESSER_EQ       reduce using rule 10 (dimvars -> ID dimensions .)
+    COMPARE         reduce using rule 10 (dimvars -> ID dimensions .)
+    DIFFERENT       reduce using rule 10 (dimvars -> ID dimensions .)
+    TO              reduce using rule 10 (dimvars -> ID dimensions .)
+    AND             reduce using rule 10 (dimvars -> ID dimensions .)
+    OR              reduce using rule 10 (dimvars -> ID dimensions .)
+    DO              reduce using rule 10 (dimvars -> ID dimensions .)
+
+
+state 50
+
+    (11) dimensions -> LBRACK . expr RBRACK
+    (12) dimensions -> LBRACK . expr RBRACK dimensions
+    (63) expr -> . expr PLUS term
+    (64) expr -> . expr MINUS term
+    (65) expr -> . term
+    (66) term -> . term TIMES factor
+    (67) term -> . term DIVIDE factor
+    (68) term -> . factor
+    (69) factor -> . C_INT
+    (70) factor -> . MINUS C_INT
+    (71) factor -> . C_FLOAT
+    (72) factor -> . MINUS C_FLOAT
+    (73) factor -> . C_CHAR
+    (74) factor -> . ID
+    (75) factor -> . dimvars
+    (76) factor -> . ID LPAREN exprs RPAREN
+    (10) dimvars -> . ID dimensions
+
+    C_INT           shift and go to state 73
+    MINUS           shift and go to state 71
+    C_FLOAT         shift and go to state 74
+    C_CHAR          shift and go to state 75
+    ID              shift and go to state 76
+
+    expr                           shift and go to state 82
+    term                           shift and go to state 70
+    factor                         shift and go to state 72
+    dimvars                        shift and go to state 77
+
+state 51
+
+    (9) multivars -> dimvars COMMA . multivars
+    (6) multivars -> . ID
+    (7) multivars -> . ID COMMA multivars
+    (8) multivars -> . dimvars
+    (9) multivars -> . dimvars COMMA multivars
+    (10) dimvars -> . ID dimensions
+
+    ID              shift and go to state 26
+
+    dimvars                        shift and go to state 27
+    multivars                      shift and go to state 83
+
+state 52
+
+    (1) program_structure -> PROGRAM ID SEMI declare_var functions MAIN LPAREN RPAREN LCURLY . statutes RCURLY
+    (21) statutes -> . assign
+    (22) statutes -> . assign statutes
+    (23) statutes -> . call_void
+    (24) statutes -> . call_void statutes
+    (25) statutes -> . returning
+    (26) statutes -> . reading
+    (27) statutes -> . reading statutes
+    (28) statutes -> . writing
+    (29) statutes -> . writing statutes
+    (30) statutes -> . decision
+    (31) statutes -> . decision statutes
+    (32) statutes -> . conditional
+    (33) statutes -> . conditional statutes
+    (34) statutes -> . nonconditional
+    (35) statutes -> . nonconditional statutes
+    (38) assign -> . ID EQUALS expr SEMI
+    (39) assign -> . dimvars EQUALS expr SEMI
+    (40) call_void -> . ID LPAREN exprs RPAREN SEMI
+    (41) returning -> . RETURN LPAREN expr RPAREN SEMI
+    (42) reading -> . READ LPAREN multivars RPAREN SEMI
+    (43) writing -> . WRITE LPAREN write_opt RPAREN SEMI
+    (48) decision -> . IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY
+    (49) decision -> . IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY
+    (50) conditional -> . WHILE LPAREN logic RPAREN DO LCURLY statutes SEMI RCURLY
+    (51) nonconditional -> . FOR expr EQUALS expr TO expr DO LCURLY statutes SEMI RCURLY
+    (10) dimvars -> . ID dimensions
+
+    ID              shift and go to state 38
+    RETURN          shift and go to state 40
+    READ            shift and go to state 41
+    WRITE           shift and go to state 42
+    IF              shift and go to state 43
+    WHILE           shift and go to state 44
+    FOR             shift and go to state 45
+
+    statutes                       shift and go to state 84
+    assign                         shift and go to state 30
+    call_void                      shift and go to state 31
+    returning                      shift and go to state 32
+    reading                        shift and go to state 33
+    writing                        shift and go to state 34
+    decision                       shift and go to state 35
+    conditional                    shift and go to state 36
+    nonconditional                 shift and go to state 37
+    dimvars                        shift and go to state 39
+
+state 53
+
+    (19) functions -> declare_fun declare_var LCURLY statutes RCURLY .
+    (20) functions -> declare_fun declare_var LCURLY statutes RCURLY . functions
+    (19) functions -> . declare_fun declare_var LCURLY statutes RCURLY
+    (20) functions -> . declare_fun declare_var LCURLY statutes RCURLY functions
+    (13) declare_fun -> . FUNCTION return_type ID LPAREN RPAREN
+    (14) declare_fun -> . FUNCTION return_type ID LPAREN params RPAREN
+
+    MAIN            reduce using rule 19 (functions -> declare_fun declare_var LCURLY statutes RCURLY .)
+    FUNCTION        shift and go to state 9
+
+    declare_fun                    shift and go to state 8
+    functions                      shift and go to state 85
+
+state 54
+
+    (22) statutes -> assign statutes .
+
+    RCURLY          reduce using rule 22 (statutes -> assign statutes .)
+    SEMI            reduce using rule 22 (statutes -> assign statutes .)
+
+
+state 55
+
+    (24) statutes -> call_void statutes .
+
+    RCURLY          reduce using rule 24 (statutes -> call_void statutes .)
+    SEMI            reduce using rule 24 (statutes -> call_void statutes .)
+
+
+state 56
+
+    (27) statutes -> reading statutes .
+
+    RCURLY          reduce using rule 27 (statutes -> reading statutes .)
+    SEMI            reduce using rule 27 (statutes -> reading statutes .)
+
+
+state 57
+
+    (29) statutes -> writing statutes .
+
+    RCURLY          reduce using rule 29 (statutes -> writing statutes .)
+    SEMI            reduce using rule 29 (statutes -> writing statutes .)
+
+
+state 58
+
+    (31) statutes -> decision statutes .
+
+    RCURLY          reduce using rule 31 (statutes -> decision statutes .)
+    SEMI            reduce using rule 31 (statutes -> decision statutes .)
+
+
+state 59
+
+    (33) statutes -> conditional statutes .
+
+    RCURLY          reduce using rule 33 (statutes -> conditional statutes .)
+    SEMI            reduce using rule 33 (statutes -> conditional statutes .)
+
+
+state 60
+
+    (35) statutes -> nonconditional statutes .
+
+    RCURLY          reduce using rule 35 (statutes -> nonconditional statutes .)
+    SEMI            reduce using rule 35 (statutes -> nonconditional statutes .)
+
+
+state 61
+
+    (38) assign -> ID EQUALS . expr SEMI
+    (63) expr -> . expr PLUS term
+    (64) expr -> . expr MINUS term
+    (65) expr -> . term
+    (66) term -> . term TIMES factor
+    (67) term -> . term DIVIDE factor
+    (68) term -> . factor
+    (69) factor -> . C_INT
+    (70) factor -> . MINUS C_INT
+    (71) factor -> . C_FLOAT
+    (72) factor -> . MINUS C_FLOAT
+    (73) factor -> . C_CHAR
+    (74) factor -> . ID
+    (75) factor -> . dimvars
+    (76) factor -> . ID LPAREN exprs RPAREN
+    (10) dimvars -> . ID dimensions
+
+    C_INT           shift and go to state 73
+    MINUS           shift and go to state 71
+    C_FLOAT         shift and go to state 74
+    C_CHAR          shift and go to state 75
+    ID              shift and go to state 76
+
+    expr                           shift and go to state 86
+    term                           shift and go to state 70
+    factor                         shift and go to state 72
+    dimvars                        shift and go to state 77
+
+state 62
+
+    (40) call_void -> ID LPAREN . exprs RPAREN SEMI
+    (61) exprs -> . expr
+    (62) exprs -> . expr COMMA exprs
+    (63) expr -> . expr PLUS term
+    (64) expr -> . expr MINUS term
+    (65) expr -> . term
+    (66) term -> . term TIMES factor
+    (67) term -> . term DIVIDE factor
+    (68) term -> . factor
+    (69) factor -> . C_INT
+    (70) factor -> . MINUS C_INT
+    (71) factor -> . C_FLOAT
+    (72) factor -> . MINUS C_FLOAT
+    (73) factor -> . C_CHAR
+    (74) factor -> . ID
+    (75) factor -> . dimvars
+    (76) factor -> . ID LPAREN exprs RPAREN
+    (10) dimvars -> . ID dimensions
+
+    C_INT           shift and go to state 73
+    MINUS           shift and go to state 71
+    C_FLOAT         shift and go to state 74
+    C_CHAR          shift and go to state 75
+    ID              shift and go to state 76
+
+    exprs                          shift and go to state 87
+    expr                           shift and go to state 88
+    term                           shift and go to state 70
+    factor                         shift and go to state 72
+    dimvars                        shift and go to state 77
+
+state 63
+
+    (39) assign -> dimvars EQUALS . expr SEMI
+    (63) expr -> . expr PLUS term
+    (64) expr -> . expr MINUS term
+    (65) expr -> . term
+    (66) term -> . term TIMES factor
+    (67) term -> . term DIVIDE factor
+    (68) term -> . factor
+    (69) factor -> . C_INT
+    (70) factor -> . MINUS C_INT
+    (71) factor -> . C_FLOAT
+    (72) factor -> . MINUS C_FLOAT
+    (73) factor -> . C_CHAR
+    (74) factor -> . ID
+    (75) factor -> . dimvars
+    (76) factor -> . ID LPAREN exprs RPAREN
+    (10) dimvars -> . ID dimensions
+
+    C_INT           shift and go to state 73
+    MINUS           shift and go to state 71
+    C_FLOAT         shift and go to state 74
+    C_CHAR          shift and go to state 75
+    ID              shift and go to state 76
+
+    dimvars                        shift and go to state 77
+    expr                           shift and go to state 89
+    term                           shift and go to state 70
+    factor                         shift and go to state 72
+
+state 64
+
+    (41) returning -> RETURN LPAREN . expr RPAREN SEMI
+    (63) expr -> . expr PLUS term
+    (64) expr -> . expr MINUS term
+    (65) expr -> . term
+    (66) term -> . term TIMES factor
+    (67) term -> . term DIVIDE factor
+    (68) term -> . factor
+    (69) factor -> . C_INT
+    (70) factor -> . MINUS C_INT
+    (71) factor -> . C_FLOAT
+    (72) factor -> . MINUS C_FLOAT
+    (73) factor -> . C_CHAR
+    (74) factor -> . ID
+    (75) factor -> . dimvars
+    (76) factor -> . ID LPAREN exprs RPAREN
+    (10) dimvars -> . ID dimensions
+
+    C_INT           shift and go to state 73
+    MINUS           shift and go to state 71
+    C_FLOAT         shift and go to state 74
+    C_CHAR          shift and go to state 75
+    ID              shift and go to state 76
+
+    expr                           shift and go to state 90
+    term                           shift and go to state 70
+    factor                         shift and go to state 72
+    dimvars                        shift and go to state 77
+
+state 65
+
+    (42) reading -> READ LPAREN . multivars RPAREN SEMI
+    (6) multivars -> . ID
+    (7) multivars -> . ID COMMA multivars
+    (8) multivars -> . dimvars
+    (9) multivars -> . dimvars COMMA multivars
+    (10) dimvars -> . ID dimensions
+
+    ID              shift and go to state 26
+
+    multivars                      shift and go to state 91
+    dimvars                        shift and go to state 27
+
+state 66
+
+    (43) writing -> WRITE LPAREN . write_opt RPAREN SEMI
+    (44) write_opt -> . QUOTE MESSAGE QUOTE
+    (45) write_opt -> . QUOTE MESSAGE QUOTE COMMA write_opt
+    (46) write_opt -> . exprs
+    (47) write_opt -> . exprs COMMA write_opt
+    (61) exprs -> . expr
+    (62) exprs -> . expr COMMA exprs
+    (63) expr -> . expr PLUS term
+    (64) expr -> . expr MINUS term
+    (65) expr -> . term
+    (66) term -> . term TIMES factor
+    (67) term -> . term DIVIDE factor
+    (68) term -> . factor
+    (69) factor -> . C_INT
+    (70) factor -> . MINUS C_INT
+    (71) factor -> . C_FLOAT
+    (72) factor -> . MINUS C_FLOAT
+    (73) factor -> . C_CHAR
+    (74) factor -> . ID
+    (75) factor -> . dimvars
+    (76) factor -> . ID LPAREN exprs RPAREN
+    (10) dimvars -> . ID dimensions
+
+    QUOTE           shift and go to state 93
+    C_INT           shift and go to state 73
+    MINUS           shift and go to state 71
+    C_FLOAT         shift and go to state 74
+    C_CHAR          shift and go to state 75
+    ID              shift and go to state 76
+
+    write_opt                      shift and go to state 92
+    exprs                          shift and go to state 94
+    expr                           shift and go to state 88
+    term                           shift and go to state 70
+    factor                         shift and go to state 72
+    dimvars                        shift and go to state 77
+
+state 67
+
+    (48) decision -> IF LPAREN . logic RPAREN THEN LCURLY statutes SEMI RCURLY
+    (49) decision -> IF LPAREN . logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY
+    (58) logic -> . relation AND relation
+    (59) logic -> . relation OR relation
+    (60) logic -> . relation
+    (52) relation -> . expr GREATER expr
+    (53) relation -> . expr GREATER_EQ expr
+    (54) relation -> . expr LESSER expr
+    (55) relation -> . expr LESSER_EQ expr
+    (56) relation -> . expr COMPARE expr
+    (57) relation -> . expr DIFFERENT expr
+    (63) expr -> . expr PLUS term
+    (64) expr -> . expr MINUS term
+    (65) expr -> . term
+    (66) term -> . term TIMES factor
+    (67) term -> . term DIVIDE factor
+    (68) term -> . factor
+    (69) factor -> . C_INT
+    (70) factor -> . MINUS C_INT
+    (71) factor -> . C_FLOAT
+    (72) factor -> . MINUS C_FLOAT
+    (73) factor -> . C_CHAR
+    (74) factor -> . ID
+    (75) factor -> . dimvars
+    (76) factor -> . ID LPAREN exprs RPAREN
+    (10) dimvars -> . ID dimensions
+
+    C_INT           shift and go to state 73
+    MINUS           shift and go to state 71
+    C_FLOAT         shift and go to state 74
+    C_CHAR          shift and go to state 75
+    ID              shift and go to state 76
+
+    logic                          shift and go to state 95
+    relation                       shift and go to state 96
+    expr                           shift and go to state 97
+    term                           shift and go to state 70
+    factor                         shift and go to state 72
+    dimvars                        shift and go to state 77
+
+state 68
+
+    (50) conditional -> WHILE LPAREN . logic RPAREN DO LCURLY statutes SEMI RCURLY
+    (58) logic -> . relation AND relation
+    (59) logic -> . relation OR relation
+    (60) logic -> . relation
+    (52) relation -> . expr GREATER expr
+    (53) relation -> . expr GREATER_EQ expr
+    (54) relation -> . expr LESSER expr
+    (55) relation -> . expr LESSER_EQ expr
+    (56) relation -> . expr COMPARE expr
+    (57) relation -> . expr DIFFERENT expr
+    (63) expr -> . expr PLUS term
+    (64) expr -> . expr MINUS term
+    (65) expr -> . term
+    (66) term -> . term TIMES factor
+    (67) term -> . term DIVIDE factor
+    (68) term -> . factor
+    (69) factor -> . C_INT
+    (70) factor -> . MINUS C_INT
+    (71) factor -> . C_FLOAT
+    (72) factor -> . MINUS C_FLOAT
+    (73) factor -> . C_CHAR
+    (74) factor -> . ID
+    (75) factor -> . dimvars
+    (76) factor -> . ID LPAREN exprs RPAREN
+    (10) dimvars -> . ID dimensions
+
+    C_INT           shift and go to state 73
+    MINUS           shift and go to state 71
+    C_FLOAT         shift and go to state 74
+    C_CHAR          shift and go to state 75
+    ID              shift and go to state 76
+
+    logic                          shift and go to state 98
+    relation                       shift and go to state 96
+    expr                           shift and go to state 97
+    term                           shift and go to state 70
+    factor                         shift and go to state 72
+    dimvars                        shift and go to state 77
+
+state 69
+
+    (51) nonconditional -> FOR expr . EQUALS expr TO expr DO LCURLY statutes SEMI RCURLY
+    (63) expr -> expr . PLUS term
+    (64) expr -> expr . MINUS term
+
+    EQUALS          shift and go to state 99
+    PLUS            shift and go to state 100
+    MINUS           shift and go to state 101
+
+
+state 70
+
+    (65) expr -> term .
+    (66) term -> term . TIMES factor
+    (67) term -> term . DIVIDE factor
+
+    EQUALS          reduce using rule 65 (expr -> term .)
+    PLUS            reduce using rule 65 (expr -> term .)
+    MINUS           reduce using rule 65 (expr -> term .)
+    RBRACK          reduce using rule 65 (expr -> term .)
+    SEMI            reduce using rule 65 (expr -> term .)
+    COMMA           reduce using rule 65 (expr -> term .)
+    RPAREN          reduce using rule 65 (expr -> term .)
+    GREATER         reduce using rule 65 (expr -> term .)
+    GREATER_EQ      reduce using rule 65 (expr -> term .)
+    LESSER          reduce using rule 65 (expr -> term .)
+    LESSER_EQ       reduce using rule 65 (expr -> term .)
+    COMPARE         reduce using rule 65 (expr -> term .)
+    DIFFERENT       reduce using rule 65 (expr -> term .)
+    TO              reduce using rule 65 (expr -> term .)
+    AND             reduce using rule 65 (expr -> term .)
+    OR              reduce using rule 65 (expr -> term .)
+    DO              reduce using rule 65 (expr -> term .)
+    TIMES           shift and go to state 102
+    DIVIDE          shift and go to state 103
+
+
+state 71
+
+    (70) factor -> MINUS . C_INT
+    (72) factor -> MINUS . C_FLOAT
+
+    C_INT           shift and go to state 104
+    C_FLOAT         shift and go to state 105
+
+
+state 72
+
+    (68) term -> factor .
+
+    TIMES           reduce using rule 68 (term -> factor .)
+    DIVIDE          reduce using rule 68 (term -> factor .)
+    EQUALS          reduce using rule 68 (term -> factor .)
+    PLUS            reduce using rule 68 (term -> factor .)
+    MINUS           reduce using rule 68 (term -> factor .)
+    RBRACK          reduce using rule 68 (term -> factor .)
+    SEMI            reduce using rule 68 (term -> factor .)
+    COMMA           reduce using rule 68 (term -> factor .)
+    RPAREN          reduce using rule 68 (term -> factor .)
+    GREATER         reduce using rule 68 (term -> factor .)
+    GREATER_EQ      reduce using rule 68 (term -> factor .)
+    LESSER          reduce using rule 68 (term -> factor .)
+    LESSER_EQ       reduce using rule 68 (term -> factor .)
+    COMPARE         reduce using rule 68 (term -> factor .)
+    DIFFERENT       reduce using rule 68 (term -> factor .)
+    TO              reduce using rule 68 (term -> factor .)
+    AND             reduce using rule 68 (term -> factor .)
+    OR              reduce using rule 68 (term -> factor .)
+    DO              reduce using rule 68 (term -> factor .)
+
+
+state 73
+
+    (69) factor -> C_INT .
+
+    TIMES           reduce using rule 69 (factor -> C_INT .)
+    DIVIDE          reduce using rule 69 (factor -> C_INT .)
+    EQUALS          reduce using rule 69 (factor -> C_INT .)
+    PLUS            reduce using rule 69 (factor -> C_INT .)
+    MINUS           reduce using rule 69 (factor -> C_INT .)
+    RBRACK          reduce using rule 69 (factor -> C_INT .)
+    SEMI            reduce using rule 69 (factor -> C_INT .)
+    COMMA           reduce using rule 69 (factor -> C_INT .)
+    RPAREN          reduce using rule 69 (factor -> C_INT .)
+    GREATER         reduce using rule 69 (factor -> C_INT .)
+    GREATER_EQ      reduce using rule 69 (factor -> C_INT .)
+    LESSER          reduce using rule 69 (factor -> C_INT .)
+    LESSER_EQ       reduce using rule 69 (factor -> C_INT .)
+    COMPARE         reduce using rule 69 (factor -> C_INT .)
+    DIFFERENT       reduce using rule 69 (factor -> C_INT .)
+    TO              reduce using rule 69 (factor -> C_INT .)
+    AND             reduce using rule 69 (factor -> C_INT .)
+    OR              reduce using rule 69 (factor -> C_INT .)
+    DO              reduce using rule 69 (factor -> C_INT .)
+
+
+state 74
+
+    (71) factor -> C_FLOAT .
+
+    TIMES           reduce using rule 71 (factor -> C_FLOAT .)
+    DIVIDE          reduce using rule 71 (factor -> C_FLOAT .)
+    EQUALS          reduce using rule 71 (factor -> C_FLOAT .)
+    PLUS            reduce using rule 71 (factor -> C_FLOAT .)
+    MINUS           reduce using rule 71 (factor -> C_FLOAT .)
+    RBRACK          reduce using rule 71 (factor -> C_FLOAT .)
+    SEMI            reduce using rule 71 (factor -> C_FLOAT .)
+    COMMA           reduce using rule 71 (factor -> C_FLOAT .)
+    RPAREN          reduce using rule 71 (factor -> C_FLOAT .)
+    GREATER         reduce using rule 71 (factor -> C_FLOAT .)
+    GREATER_EQ      reduce using rule 71 (factor -> C_FLOAT .)
+    LESSER          reduce using rule 71 (factor -> C_FLOAT .)
+    LESSER_EQ       reduce using rule 71 (factor -> C_FLOAT .)
+    COMPARE         reduce using rule 71 (factor -> C_FLOAT .)
+    DIFFERENT       reduce using rule 71 (factor -> C_FLOAT .)
+    TO              reduce using rule 71 (factor -> C_FLOAT .)
+    AND             reduce using rule 71 (factor -> C_FLOAT .)
+    OR              reduce using rule 71 (factor -> C_FLOAT .)
+    DO              reduce using rule 71 (factor -> C_FLOAT .)
+
+
+state 75
+
+    (73) factor -> C_CHAR .
+
+    TIMES           reduce using rule 73 (factor -> C_CHAR .)
+    DIVIDE          reduce using rule 73 (factor -> C_CHAR .)
+    EQUALS          reduce using rule 73 (factor -> C_CHAR .)
+    PLUS            reduce using rule 73 (factor -> C_CHAR .)
+    MINUS           reduce using rule 73 (factor -> C_CHAR .)
+    RBRACK          reduce using rule 73 (factor -> C_CHAR .)
+    SEMI            reduce using rule 73 (factor -> C_CHAR .)
+    COMMA           reduce using rule 73 (factor -> C_CHAR .)
+    RPAREN          reduce using rule 73 (factor -> C_CHAR .)
+    GREATER         reduce using rule 73 (factor -> C_CHAR .)
+    GREATER_EQ      reduce using rule 73 (factor -> C_CHAR .)
+    LESSER          reduce using rule 73 (factor -> C_CHAR .)
+    LESSER_EQ       reduce using rule 73 (factor -> C_CHAR .)
+    COMPARE         reduce using rule 73 (factor -> C_CHAR .)
+    DIFFERENT       reduce using rule 73 (factor -> C_CHAR .)
+    TO              reduce using rule 73 (factor -> C_CHAR .)
+    AND             reduce using rule 73 (factor -> C_CHAR .)
+    OR              reduce using rule 73 (factor -> C_CHAR .)
+    DO              reduce using rule 73 (factor -> C_CHAR .)
+
+
+state 76
+
+    (74) factor -> ID .
+    (76) factor -> ID . LPAREN exprs RPAREN
+    (10) dimvars -> ID . dimensions
+    (11) dimensions -> . LBRACK expr RBRACK
+    (12) dimensions -> . LBRACK expr RBRACK dimensions
+
+    TIMES           reduce using rule 74 (factor -> ID .)
+    DIVIDE          reduce using rule 74 (factor -> ID .)
+    EQUALS          reduce using rule 74 (factor -> ID .)
+    PLUS            reduce using rule 74 (factor -> ID .)
+    MINUS           reduce using rule 74 (factor -> ID .)
+    RBRACK          reduce using rule 74 (factor -> ID .)
+    SEMI            reduce using rule 74 (factor -> ID .)
+    COMMA           reduce using rule 74 (factor -> ID .)
+    RPAREN          reduce using rule 74 (factor -> ID .)
+    GREATER         reduce using rule 74 (factor -> ID .)
+    GREATER_EQ      reduce using rule 74 (factor -> ID .)
+    LESSER          reduce using rule 74 (factor -> ID .)
+    LESSER_EQ       reduce using rule 74 (factor -> ID .)
+    COMPARE         reduce using rule 74 (factor -> ID .)
+    DIFFERENT       reduce using rule 74 (factor -> ID .)
+    TO              reduce using rule 74 (factor -> ID .)
+    AND             reduce using rule 74 (factor -> ID .)
+    OR              reduce using rule 74 (factor -> ID .)
+    DO              reduce using rule 74 (factor -> ID .)
+    LPAREN          shift and go to state 106
+    LBRACK          shift and go to state 50
+
+    dimensions                     shift and go to state 49
+
+state 77
+
+    (75) factor -> dimvars .
+
+    TIMES           reduce using rule 75 (factor -> dimvars .)
+    DIVIDE          reduce using rule 75 (factor -> dimvars .)
+    EQUALS          reduce using rule 75 (factor -> dimvars .)
+    PLUS            reduce using rule 75 (factor -> dimvars .)
+    MINUS           reduce using rule 75 (factor -> dimvars .)
+    RBRACK          reduce using rule 75 (factor -> dimvars .)
+    SEMI            reduce using rule 75 (factor -> dimvars .)
+    COMMA           reduce using rule 75 (factor -> dimvars .)
+    RPAREN          reduce using rule 75 (factor -> dimvars .)
+    GREATER         reduce using rule 75 (factor -> dimvars .)
+    GREATER_EQ      reduce using rule 75 (factor -> dimvars .)
+    LESSER          reduce using rule 75 (factor -> dimvars .)
+    LESSER_EQ       reduce using rule 75 (factor -> dimvars .)
+    COMPARE         reduce using rule 75 (factor -> dimvars .)
+    DIFFERENT       reduce using rule 75 (factor -> dimvars .)
+    TO              reduce using rule 75 (factor -> dimvars .)
+    AND             reduce using rule 75 (factor -> dimvars .)
+    OR              reduce using rule 75 (factor -> dimvars .)
+    DO              reduce using rule 75 (factor -> dimvars .)
+
+
+state 78
+
+    (13) declare_fun -> FUNCTION return_type ID LPAREN RPAREN .
+
+    VARS            reduce using rule 13 (declare_fun -> FUNCTION return_type ID LPAREN RPAREN .)
+
+
+state 79
+
+    (14) declare_fun -> FUNCTION return_type ID LPAREN params . RPAREN
+
+    RPAREN          shift and go to state 107
+
+
+state 80
+
+    (36) params -> type . COLON multivars
+    (37) params -> type . COLON multivars SEMI params
+
+    COLON           shift and go to state 108
+
+
+state 81
+
+    (7) multivars -> ID COMMA multivars .
+
+    SEMI            reduce using rule 7 (multivars -> ID COMMA multivars .)
+    RPAREN          reduce using rule 7 (multivars -> ID COMMA multivars .)
+
+
+state 82
+
+    (11) dimensions -> LBRACK expr . RBRACK
+    (12) dimensions -> LBRACK expr . RBRACK dimensions
+    (63) expr -> expr . PLUS term
+    (64) expr -> expr . MINUS term
+
+    RBRACK          shift and go to state 109
+    PLUS            shift and go to state 100
+    MINUS           shift and go to state 101
+
+
+state 83
+
+    (9) multivars -> dimvars COMMA multivars .
+
+    SEMI            reduce using rule 9 (multivars -> dimvars COMMA multivars .)
+    RPAREN          reduce using rule 9 (multivars -> dimvars COMMA multivars .)
+
+
+state 84
+
+    (1) program_structure -> PROGRAM ID SEMI declare_var functions MAIN LPAREN RPAREN LCURLY statutes . RCURLY
+
+    RCURLY          shift and go to state 110
+
+
+state 85
+
+    (20) functions -> declare_fun declare_var LCURLY statutes RCURLY functions .
+
+    MAIN            reduce using rule 20 (functions -> declare_fun declare_var LCURLY statutes RCURLY functions .)
+
+
+state 86
+
+    (38) assign -> ID EQUALS expr . SEMI
+    (63) expr -> expr . PLUS term
+    (64) expr -> expr . MINUS term
+
+    SEMI            shift and go to state 111
+    PLUS            shift and go to state 100
+    MINUS           shift and go to state 101
+
+
+state 87
+
+    (40) call_void -> ID LPAREN exprs . RPAREN SEMI
+
+    RPAREN          shift and go to state 112
+
+
+state 88
+
+    (61) exprs -> expr .
+    (62) exprs -> expr . COMMA exprs
+    (63) expr -> expr . PLUS term
+    (64) expr -> expr . MINUS term
+
+  ! shift/reduce conflict for COMMA resolved as shift
+    RPAREN          reduce using rule 61 (exprs -> expr .)
+    COMMA           shift and go to state 113
+    PLUS            shift and go to state 100
+    MINUS           shift and go to state 101
+
+  ! COMMA           [ reduce using rule 61 (exprs -> expr .) ]
+
+
+state 89
+
+    (39) assign -> dimvars EQUALS expr . SEMI
+    (63) expr -> expr . PLUS term
+    (64) expr -> expr . MINUS term
+
+    SEMI            shift and go to state 114
+    PLUS            shift and go to state 100
+    MINUS           shift and go to state 101
+
+
+state 90
+
+    (41) returning -> RETURN LPAREN expr . RPAREN SEMI
+    (63) expr -> expr . PLUS term
+    (64) expr -> expr . MINUS term
+
+    RPAREN          shift and go to state 115
+    PLUS            shift and go to state 100
+    MINUS           shift and go to state 101
+
+
+state 91
+
+    (42) reading -> READ LPAREN multivars . RPAREN SEMI
+
+    RPAREN          shift and go to state 116
+
+
+state 92
+
+    (43) writing -> WRITE LPAREN write_opt . RPAREN SEMI
+
+    RPAREN          shift and go to state 117
+
+
+state 93
+
+    (44) write_opt -> QUOTE . MESSAGE QUOTE
+    (45) write_opt -> QUOTE . MESSAGE QUOTE COMMA write_opt
+
+    MESSAGE         shift and go to state 118
+
+
+state 94
+
+    (46) write_opt -> exprs .
+    (47) write_opt -> exprs . COMMA write_opt
+
+    RPAREN          reduce using rule 46 (write_opt -> exprs .)
+    COMMA           shift and go to state 119
+
+
+state 95
+
+    (48) decision -> IF LPAREN logic . RPAREN THEN LCURLY statutes SEMI RCURLY
+    (49) decision -> IF LPAREN logic . RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY
+
+    RPAREN          shift and go to state 120
+
+
+state 96
+
+    (58) logic -> relation . AND relation
+    (59) logic -> relation . OR relation
+    (60) logic -> relation .
+
+    AND             shift and go to state 121
+    OR              shift and go to state 122
+    RPAREN          reduce using rule 60 (logic -> relation .)
+
+
+state 97
+
+    (52) relation -> expr . GREATER expr
+    (53) relation -> expr . GREATER_EQ expr
+    (54) relation -> expr . LESSER expr
+    (55) relation -> expr . LESSER_EQ expr
+    (56) relation -> expr . COMPARE expr
+    (57) relation -> expr . DIFFERENT expr
+    (63) expr -> expr . PLUS term
+    (64) expr -> expr . MINUS term
+
+    GREATER         shift and go to state 123
+    GREATER_EQ      shift and go to state 124
+    LESSER          shift and go to state 125
+    LESSER_EQ       shift and go to state 126
+    COMPARE         shift and go to state 127
+    DIFFERENT       shift and go to state 128
+    PLUS            shift and go to state 100
+    MINUS           shift and go to state 101
+
+
+state 98
+
+    (50) conditional -> WHILE LPAREN logic . RPAREN DO LCURLY statutes SEMI RCURLY
+
+    RPAREN          shift and go to state 129
+
+
+state 99
+
+    (51) nonconditional -> FOR expr EQUALS . expr TO expr DO LCURLY statutes SEMI RCURLY
+    (63) expr -> . expr PLUS term
+    (64) expr -> . expr MINUS term
+    (65) expr -> . term
+    (66) term -> . term TIMES factor
+    (67) term -> . term DIVIDE factor
+    (68) term -> . factor
+    (69) factor -> . C_INT
+    (70) factor -> . MINUS C_INT
+    (71) factor -> . C_FLOAT
+    (72) factor -> . MINUS C_FLOAT
+    (73) factor -> . C_CHAR
+    (74) factor -> . ID
+    (75) factor -> . dimvars
+    (76) factor -> . ID LPAREN exprs RPAREN
+    (10) dimvars -> . ID dimensions
+
+    C_INT           shift and go to state 73
+    MINUS           shift and go to state 71
+    C_FLOAT         shift and go to state 74
+    C_CHAR          shift and go to state 75
+    ID              shift and go to state 76
+
+    expr                           shift and go to state 130
+    term                           shift and go to state 70
+    factor                         shift and go to state 72
+    dimvars                        shift and go to state 77
+
+state 100
+
+    (63) expr -> expr PLUS . term
+    (66) term -> . term TIMES factor
+    (67) term -> . term DIVIDE factor
+    (68) term -> . factor
+    (69) factor -> . C_INT
+    (70) factor -> . MINUS C_INT
+    (71) factor -> . C_FLOAT
+    (72) factor -> . MINUS C_FLOAT
+    (73) factor -> . C_CHAR
+    (74) factor -> . ID
+    (75) factor -> . dimvars
+    (76) factor -> . ID LPAREN exprs RPAREN
+    (10) dimvars -> . ID dimensions
+
+    C_INT           shift and go to state 73
+    MINUS           shift and go to state 71
+    C_FLOAT         shift and go to state 74
+    C_CHAR          shift and go to state 75
+    ID              shift and go to state 76
+
+    term                           shift and go to state 131
+    factor                         shift and go to state 72
+    dimvars                        shift and go to state 77
+
+state 101
+
+    (64) expr -> expr MINUS . term
+    (66) term -> . term TIMES factor
+    (67) term -> . term DIVIDE factor
+    (68) term -> . factor
+    (69) factor -> . C_INT
+    (70) factor -> . MINUS C_INT
+    (71) factor -> . C_FLOAT
+    (72) factor -> . MINUS C_FLOAT
+    (73) factor -> . C_CHAR
+    (74) factor -> . ID
+    (75) factor -> . dimvars
+    (76) factor -> . ID LPAREN exprs RPAREN
+    (10) dimvars -> . ID dimensions
+
+    C_INT           shift and go to state 73
+    MINUS           shift and go to state 71
+    C_FLOAT         shift and go to state 74
+    C_CHAR          shift and go to state 75
+    ID              shift and go to state 76
+
+    term                           shift and go to state 132
+    factor                         shift and go to state 72
+    dimvars                        shift and go to state 77
+
+state 102
+
+    (66) term -> term TIMES . factor
+    (69) factor -> . C_INT
+    (70) factor -> . MINUS C_INT
+    (71) factor -> . C_FLOAT
+    (72) factor -> . MINUS C_FLOAT
+    (73) factor -> . C_CHAR
+    (74) factor -> . ID
+    (75) factor -> . dimvars
+    (76) factor -> . ID LPAREN exprs RPAREN
+    (10) dimvars -> . ID dimensions
+
+    C_INT           shift and go to state 73
+    MINUS           shift and go to state 71
+    C_FLOAT         shift and go to state 74
+    C_CHAR          shift and go to state 75
+    ID              shift and go to state 76
+
+    factor                         shift and go to state 133
+    dimvars                        shift and go to state 77
+
+state 103
+
+    (67) term -> term DIVIDE . factor
+    (69) factor -> . C_INT
+    (70) factor -> . MINUS C_INT
+    (71) factor -> . C_FLOAT
+    (72) factor -> . MINUS C_FLOAT
+    (73) factor -> . C_CHAR
+    (74) factor -> . ID
+    (75) factor -> . dimvars
+    (76) factor -> . ID LPAREN exprs RPAREN
+    (10) dimvars -> . ID dimensions
+
+    C_INT           shift and go to state 73
+    MINUS           shift and go to state 71
+    C_FLOAT         shift and go to state 74
+    C_CHAR          shift and go to state 75
+    ID              shift and go to state 76
+
+    factor                         shift and go to state 134
+    dimvars                        shift and go to state 77
+
+state 104
+
+    (70) factor -> MINUS C_INT .
+
+    TIMES           reduce using rule 70 (factor -> MINUS C_INT .)
+    DIVIDE          reduce using rule 70 (factor -> MINUS C_INT .)
+    EQUALS          reduce using rule 70 (factor -> MINUS C_INT .)
+    PLUS            reduce using rule 70 (factor -> MINUS C_INT .)
+    MINUS           reduce using rule 70 (factor -> MINUS C_INT .)
+    RBRACK          reduce using rule 70 (factor -> MINUS C_INT .)
+    SEMI            reduce using rule 70 (factor -> MINUS C_INT .)
+    COMMA           reduce using rule 70 (factor -> MINUS C_INT .)
+    RPAREN          reduce using rule 70 (factor -> MINUS C_INT .)
+    GREATER         reduce using rule 70 (factor -> MINUS C_INT .)
+    GREATER_EQ      reduce using rule 70 (factor -> MINUS C_INT .)
+    LESSER          reduce using rule 70 (factor -> MINUS C_INT .)
+    LESSER_EQ       reduce using rule 70 (factor -> MINUS C_INT .)
+    COMPARE         reduce using rule 70 (factor -> MINUS C_INT .)
+    DIFFERENT       reduce using rule 70 (factor -> MINUS C_INT .)
+    TO              reduce using rule 70 (factor -> MINUS C_INT .)
+    AND             reduce using rule 70 (factor -> MINUS C_INT .)
+    OR              reduce using rule 70 (factor -> MINUS C_INT .)
+    DO              reduce using rule 70 (factor -> MINUS C_INT .)
+
+
+state 105
+
+    (72) factor -> MINUS C_FLOAT .
+
+    TIMES           reduce using rule 72 (factor -> MINUS C_FLOAT .)
+    DIVIDE          reduce using rule 72 (factor -> MINUS C_FLOAT .)
+    EQUALS          reduce using rule 72 (factor -> MINUS C_FLOAT .)
+    PLUS            reduce using rule 72 (factor -> MINUS C_FLOAT .)
+    MINUS           reduce using rule 72 (factor -> MINUS C_FLOAT .)
+    RBRACK          reduce using rule 72 (factor -> MINUS C_FLOAT .)
+    SEMI            reduce using rule 72 (factor -> MINUS C_FLOAT .)
+    COMMA           reduce using rule 72 (factor -> MINUS C_FLOAT .)
+    RPAREN          reduce using rule 72 (factor -> MINUS C_FLOAT .)
+    GREATER         reduce using rule 72 (factor -> MINUS C_FLOAT .)
+    GREATER_EQ      reduce using rule 72 (factor -> MINUS C_FLOAT .)
+    LESSER          reduce using rule 72 (factor -> MINUS C_FLOAT .)
+    LESSER_EQ       reduce using rule 72 (factor -> MINUS C_FLOAT .)
+    COMPARE         reduce using rule 72 (factor -> MINUS C_FLOAT .)
+    DIFFERENT       reduce using rule 72 (factor -> MINUS C_FLOAT .)
+    TO              reduce using rule 72 (factor -> MINUS C_FLOAT .)
+    AND             reduce using rule 72 (factor -> MINUS C_FLOAT .)
+    OR              reduce using rule 72 (factor -> MINUS C_FLOAT .)
+    DO              reduce using rule 72 (factor -> MINUS C_FLOAT .)
+
+
+state 106
+
+    (76) factor -> ID LPAREN . exprs RPAREN
+    (61) exprs -> . expr
+    (62) exprs -> . expr COMMA exprs
+    (63) expr -> . expr PLUS term
+    (64) expr -> . expr MINUS term
+    (65) expr -> . term
+    (66) term -> . term TIMES factor
+    (67) term -> . term DIVIDE factor
+    (68) term -> . factor
+    (69) factor -> . C_INT
+    (70) factor -> . MINUS C_INT
+    (71) factor -> . C_FLOAT
+    (72) factor -> . MINUS C_FLOAT
+    (73) factor -> . C_CHAR
+    (74) factor -> . ID
+    (75) factor -> . dimvars
+    (76) factor -> . ID LPAREN exprs RPAREN
+    (10) dimvars -> . ID dimensions
+
+    C_INT           shift and go to state 73
+    MINUS           shift and go to state 71
+    C_FLOAT         shift and go to state 74
+    C_CHAR          shift and go to state 75
+    ID              shift and go to state 76
+
+    exprs                          shift and go to state 135
+    expr                           shift and go to state 88
+    term                           shift and go to state 70
+    factor                         shift and go to state 72
+    dimvars                        shift and go to state 77
+
+state 107
+
+    (14) declare_fun -> FUNCTION return_type ID LPAREN params RPAREN .
+
+    VARS            reduce using rule 14 (declare_fun -> FUNCTION return_type ID LPAREN params RPAREN .)
+
+
+state 108
+
+    (36) params -> type COLON . multivars
+    (37) params -> type COLON . multivars SEMI params
+    (6) multivars -> . ID
+    (7) multivars -> . ID COMMA multivars
+    (8) multivars -> . dimvars
+    (9) multivars -> . dimvars COMMA multivars
+    (10) dimvars -> . ID dimensions
+
+    ID              shift and go to state 26
+
+    multivars                      shift and go to state 136
+    dimvars                        shift and go to state 27
+
+state 109
+
+    (11) dimensions -> LBRACK expr RBRACK .
+    (12) dimensions -> LBRACK expr RBRACK . dimensions
+    (11) dimensions -> . LBRACK expr RBRACK
+    (12) dimensions -> . LBRACK expr RBRACK dimensions
+
+    COMMA           reduce using rule 11 (dimensions -> LBRACK expr RBRACK .)
+    SEMI            reduce using rule 11 (dimensions -> LBRACK expr RBRACK .)
+    RPAREN          reduce using rule 11 (dimensions -> LBRACK expr RBRACK .)
+    EQUALS          reduce using rule 11 (dimensions -> LBRACK expr RBRACK .)
+    TIMES           reduce using rule 11 (dimensions -> LBRACK expr RBRACK .)
+    DIVIDE          reduce using rule 11 (dimensions -> LBRACK expr RBRACK .)
+    PLUS            reduce using rule 11 (dimensions -> LBRACK expr RBRACK .)
+    MINUS           reduce using rule 11 (dimensions -> LBRACK expr RBRACK .)
+    RBRACK          reduce using rule 11 (dimensions -> LBRACK expr RBRACK .)
+    GREATER         reduce using rule 11 (dimensions -> LBRACK expr RBRACK .)
+    GREATER_EQ      reduce using rule 11 (dimensions -> LBRACK expr RBRACK .)
+    LESSER          reduce using rule 11 (dimensions -> LBRACK expr RBRACK .)
+    LESSER_EQ       reduce using rule 11 (dimensions -> LBRACK expr RBRACK .)
+    COMPARE         reduce using rule 11 (dimensions -> LBRACK expr RBRACK .)
+    DIFFERENT       reduce using rule 11 (dimensions -> LBRACK expr RBRACK .)
+    TO              reduce using rule 11 (dimensions -> LBRACK expr RBRACK .)
+    AND             reduce using rule 11 (dimensions -> LBRACK expr RBRACK .)
+    OR              reduce using rule 11 (dimensions -> LBRACK expr RBRACK .)
+    DO              reduce using rule 11 (dimensions -> LBRACK expr RBRACK .)
+    LBRACK          shift and go to state 50
+
+    dimensions                     shift and go to state 137
+
+state 110
+
+    (1) program_structure -> PROGRAM ID SEMI declare_var functions MAIN LPAREN RPAREN LCURLY statutes RCURLY .
+
+    $end            reduce using rule 1 (program_structure -> PROGRAM ID SEMI declare_var functions MAIN LPAREN RPAREN LCURLY statutes RCURLY .)
+
+
+state 111
+
+    (38) assign -> ID EQUALS expr SEMI .
+
+    ID              reduce using rule 38 (assign -> ID EQUALS expr SEMI .)
+    RETURN          reduce using rule 38 (assign -> ID EQUALS expr SEMI .)
+    READ            reduce using rule 38 (assign -> ID EQUALS expr SEMI .)
+    WRITE           reduce using rule 38 (assign -> ID EQUALS expr SEMI .)
+    IF              reduce using rule 38 (assign -> ID EQUALS expr SEMI .)
+    WHILE           reduce using rule 38 (assign -> ID EQUALS expr SEMI .)
+    FOR             reduce using rule 38 (assign -> ID EQUALS expr SEMI .)
+    RCURLY          reduce using rule 38 (assign -> ID EQUALS expr SEMI .)
+    SEMI            reduce using rule 38 (assign -> ID EQUALS expr SEMI .)
+
+
+state 112
+
+    (40) call_void -> ID LPAREN exprs RPAREN . SEMI
+
+    SEMI            shift and go to state 138
+
+
+state 113
+
+    (62) exprs -> expr COMMA . exprs
+    (61) exprs -> . expr
+    (62) exprs -> . expr COMMA exprs
+    (63) expr -> . expr PLUS term
+    (64) expr -> . expr MINUS term
+    (65) expr -> . term
+    (66) term -> . term TIMES factor
+    (67) term -> . term DIVIDE factor
+    (68) term -> . factor
+    (69) factor -> . C_INT
+    (70) factor -> . MINUS C_INT
+    (71) factor -> . C_FLOAT
+    (72) factor -> . MINUS C_FLOAT
+    (73) factor -> . C_CHAR
+    (74) factor -> . ID
+    (75) factor -> . dimvars
+    (76) factor -> . ID LPAREN exprs RPAREN
+    (10) dimvars -> . ID dimensions
+
+    C_INT           shift and go to state 73
+    MINUS           shift and go to state 71
+    C_FLOAT         shift and go to state 74
+    C_CHAR          shift and go to state 75
+    ID              shift and go to state 76
+
+    expr                           shift and go to state 88
+    exprs                          shift and go to state 139
+    term                           shift and go to state 70
+    factor                         shift and go to state 72
+    dimvars                        shift and go to state 77
+
+state 114
+
+    (39) assign -> dimvars EQUALS expr SEMI .
+
+    ID              reduce using rule 39 (assign -> dimvars EQUALS expr SEMI .)
+    RETURN          reduce using rule 39 (assign -> dimvars EQUALS expr SEMI .)
+    READ            reduce using rule 39 (assign -> dimvars EQUALS expr SEMI .)
+    WRITE           reduce using rule 39 (assign -> dimvars EQUALS expr SEMI .)
+    IF              reduce using rule 39 (assign -> dimvars EQUALS expr SEMI .)
+    WHILE           reduce using rule 39 (assign -> dimvars EQUALS expr SEMI .)
+    FOR             reduce using rule 39 (assign -> dimvars EQUALS expr SEMI .)
+    RCURLY          reduce using rule 39 (assign -> dimvars EQUALS expr SEMI .)
+    SEMI            reduce using rule 39 (assign -> dimvars EQUALS expr SEMI .)
+
+
+state 115
+
+    (41) returning -> RETURN LPAREN expr RPAREN . SEMI
+
+    SEMI            shift and go to state 140
+
+
+state 116
+
+    (42) reading -> READ LPAREN multivars RPAREN . SEMI
+
+    SEMI            shift and go to state 141
+
+
+state 117
+
+    (43) writing -> WRITE LPAREN write_opt RPAREN . SEMI
+
+    SEMI            shift and go to state 142
+
+
+state 118
+
+    (44) write_opt -> QUOTE MESSAGE . QUOTE
+    (45) write_opt -> QUOTE MESSAGE . QUOTE COMMA write_opt
+
+    QUOTE           shift and go to state 143
+
+
+state 119
+
+    (47) write_opt -> exprs COMMA . write_opt
+    (44) write_opt -> . QUOTE MESSAGE QUOTE
+    (45) write_opt -> . QUOTE MESSAGE QUOTE COMMA write_opt
+    (46) write_opt -> . exprs
+    (47) write_opt -> . exprs COMMA write_opt
+    (61) exprs -> . expr
+    (62) exprs -> . expr COMMA exprs
+    (63) expr -> . expr PLUS term
+    (64) expr -> . expr MINUS term
+    (65) expr -> . term
+    (66) term -> . term TIMES factor
+    (67) term -> . term DIVIDE factor
+    (68) term -> . factor
+    (69) factor -> . C_INT
+    (70) factor -> . MINUS C_INT
+    (71) factor -> . C_FLOAT
+    (72) factor -> . MINUS C_FLOAT
+    (73) factor -> . C_CHAR
+    (74) factor -> . ID
+    (75) factor -> . dimvars
+    (76) factor -> . ID LPAREN exprs RPAREN
+    (10) dimvars -> . ID dimensions
+
+    QUOTE           shift and go to state 93
+    C_INT           shift and go to state 73
+    MINUS           shift and go to state 71
+    C_FLOAT         shift and go to state 74
+    C_CHAR          shift and go to state 75
+    ID              shift and go to state 76
+
+    exprs                          shift and go to state 94
+    write_opt                      shift and go to state 144
+    expr                           shift and go to state 88
+    term                           shift and go to state 70
+    factor                         shift and go to state 72
+    dimvars                        shift and go to state 77
+
+state 120
+
+    (48) decision -> IF LPAREN logic RPAREN . THEN LCURLY statutes SEMI RCURLY
+    (49) decision -> IF LPAREN logic RPAREN . THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY
+
+    THEN            shift and go to state 145
+
+
+state 121
+
+    (58) logic -> relation AND . relation
+    (52) relation -> . expr GREATER expr
+    (53) relation -> . expr GREATER_EQ expr
+    (54) relation -> . expr LESSER expr
+    (55) relation -> . expr LESSER_EQ expr
+    (56) relation -> . expr COMPARE expr
+    (57) relation -> . expr DIFFERENT expr
+    (63) expr -> . expr PLUS term
+    (64) expr -> . expr MINUS term
+    (65) expr -> . term
+    (66) term -> . term TIMES factor
+    (67) term -> . term DIVIDE factor
+    (68) term -> . factor
+    (69) factor -> . C_INT
+    (70) factor -> . MINUS C_INT
+    (71) factor -> . C_FLOAT
+    (72) factor -> . MINUS C_FLOAT
+    (73) factor -> . C_CHAR
+    (74) factor -> . ID
+    (75) factor -> . dimvars
+    (76) factor -> . ID LPAREN exprs RPAREN
+    (10) dimvars -> . ID dimensions
+
+    C_INT           shift and go to state 73
+    MINUS           shift and go to state 71
+    C_FLOAT         shift and go to state 74
+    C_CHAR          shift and go to state 75
+    ID              shift and go to state 76
+
+    relation                       shift and go to state 146
+    expr                           shift and go to state 97
+    term                           shift and go to state 70
+    factor                         shift and go to state 72
+    dimvars                        shift and go to state 77
+
+state 122
+
+    (59) logic -> relation OR . relation
+    (52) relation -> . expr GREATER expr
+    (53) relation -> . expr GREATER_EQ expr
+    (54) relation -> . expr LESSER expr
+    (55) relation -> . expr LESSER_EQ expr
+    (56) relation -> . expr COMPARE expr
+    (57) relation -> . expr DIFFERENT expr
+    (63) expr -> . expr PLUS term
+    (64) expr -> . expr MINUS term
+    (65) expr -> . term
+    (66) term -> . term TIMES factor
+    (67) term -> . term DIVIDE factor
+    (68) term -> . factor
+    (69) factor -> . C_INT
+    (70) factor -> . MINUS C_INT
+    (71) factor -> . C_FLOAT
+    (72) factor -> . MINUS C_FLOAT
+    (73) factor -> . C_CHAR
+    (74) factor -> . ID
+    (75) factor -> . dimvars
+    (76) factor -> . ID LPAREN exprs RPAREN
+    (10) dimvars -> . ID dimensions
+
+    C_INT           shift and go to state 73
+    MINUS           shift and go to state 71
+    C_FLOAT         shift and go to state 74
+    C_CHAR          shift and go to state 75
+    ID              shift and go to state 76
+
+    relation                       shift and go to state 147
+    expr                           shift and go to state 97
+    term                           shift and go to state 70
+    factor                         shift and go to state 72
+    dimvars                        shift and go to state 77
+
+state 123
+
+    (52) relation -> expr GREATER . expr
+    (63) expr -> . expr PLUS term
+    (64) expr -> . expr MINUS term
+    (65) expr -> . term
+    (66) term -> . term TIMES factor
+    (67) term -> . term DIVIDE factor
+    (68) term -> . factor
+    (69) factor -> . C_INT
+    (70) factor -> . MINUS C_INT
+    (71) factor -> . C_FLOAT
+    (72) factor -> . MINUS C_FLOAT
+    (73) factor -> . C_CHAR
+    (74) factor -> . ID
+    (75) factor -> . dimvars
+    (76) factor -> . ID LPAREN exprs RPAREN
+    (10) dimvars -> . ID dimensions
+
+    C_INT           shift and go to state 73
+    MINUS           shift and go to state 71
+    C_FLOAT         shift and go to state 74
+    C_CHAR          shift and go to state 75
+    ID              shift and go to state 76
+
+    expr                           shift and go to state 148
+    term                           shift and go to state 70
+    factor                         shift and go to state 72
+    dimvars                        shift and go to state 77
+
+state 124
+
+    (53) relation -> expr GREATER_EQ . expr
+    (63) expr -> . expr PLUS term
+    (64) expr -> . expr MINUS term
+    (65) expr -> . term
+    (66) term -> . term TIMES factor
+    (67) term -> . term DIVIDE factor
+    (68) term -> . factor
+    (69) factor -> . C_INT
+    (70) factor -> . MINUS C_INT
+    (71) factor -> . C_FLOAT
+    (72) factor -> . MINUS C_FLOAT
+    (73) factor -> . C_CHAR
+    (74) factor -> . ID
+    (75) factor -> . dimvars
+    (76) factor -> . ID LPAREN exprs RPAREN
+    (10) dimvars -> . ID dimensions
+
+    C_INT           shift and go to state 73
+    MINUS           shift and go to state 71
+    C_FLOAT         shift and go to state 74
+    C_CHAR          shift and go to state 75
+    ID              shift and go to state 76
+
+    expr                           shift and go to state 149
+    term                           shift and go to state 70
+    factor                         shift and go to state 72
+    dimvars                        shift and go to state 77
+
+state 125
+
+    (54) relation -> expr LESSER . expr
+    (63) expr -> . expr PLUS term
+    (64) expr -> . expr MINUS term
+    (65) expr -> . term
+    (66) term -> . term TIMES factor
+    (67) term -> . term DIVIDE factor
+    (68) term -> . factor
+    (69) factor -> . C_INT
+    (70) factor -> . MINUS C_INT
+    (71) factor -> . C_FLOAT
+    (72) factor -> . MINUS C_FLOAT
+    (73) factor -> . C_CHAR
+    (74) factor -> . ID
+    (75) factor -> . dimvars
+    (76) factor -> . ID LPAREN exprs RPAREN
+    (10) dimvars -> . ID dimensions
+
+    C_INT           shift and go to state 73
+    MINUS           shift and go to state 71
+    C_FLOAT         shift and go to state 74
+    C_CHAR          shift and go to state 75
+    ID              shift and go to state 76
+
+    expr                           shift and go to state 150
+    term                           shift and go to state 70
+    factor                         shift and go to state 72
+    dimvars                        shift and go to state 77
+
+state 126
+
+    (55) relation -> expr LESSER_EQ . expr
+    (63) expr -> . expr PLUS term
+    (64) expr -> . expr MINUS term
+    (65) expr -> . term
+    (66) term -> . term TIMES factor
+    (67) term -> . term DIVIDE factor
+    (68) term -> . factor
+    (69) factor -> . C_INT
+    (70) factor -> . MINUS C_INT
+    (71) factor -> . C_FLOAT
+    (72) factor -> . MINUS C_FLOAT
+    (73) factor -> . C_CHAR
+    (74) factor -> . ID
+    (75) factor -> . dimvars
+    (76) factor -> . ID LPAREN exprs RPAREN
+    (10) dimvars -> . ID dimensions
+
+    C_INT           shift and go to state 73
+    MINUS           shift and go to state 71
+    C_FLOAT         shift and go to state 74
+    C_CHAR          shift and go to state 75
+    ID              shift and go to state 76
+
+    expr                           shift and go to state 151
+    term                           shift and go to state 70
+    factor                         shift and go to state 72
+    dimvars                        shift and go to state 77
+
+state 127
+
+    (56) relation -> expr COMPARE . expr
+    (63) expr -> . expr PLUS term
+    (64) expr -> . expr MINUS term
+    (65) expr -> . term
+    (66) term -> . term TIMES factor
+    (67) term -> . term DIVIDE factor
+    (68) term -> . factor
+    (69) factor -> . C_INT
+    (70) factor -> . MINUS C_INT
+    (71) factor -> . C_FLOAT
+    (72) factor -> . MINUS C_FLOAT
+    (73) factor -> . C_CHAR
+    (74) factor -> . ID
+    (75) factor -> . dimvars
+    (76) factor -> . ID LPAREN exprs RPAREN
+    (10) dimvars -> . ID dimensions
+
+    C_INT           shift and go to state 73
+    MINUS           shift and go to state 71
+    C_FLOAT         shift and go to state 74
+    C_CHAR          shift and go to state 75
+    ID              shift and go to state 76
+
+    expr                           shift and go to state 152
+    term                           shift and go to state 70
+    factor                         shift and go to state 72
+    dimvars                        shift and go to state 77
+
+state 128
+
+    (57) relation -> expr DIFFERENT . expr
+    (63) expr -> . expr PLUS term
+    (64) expr -> . expr MINUS term
+    (65) expr -> . term
+    (66) term -> . term TIMES factor
+    (67) term -> . term DIVIDE factor
+    (68) term -> . factor
+    (69) factor -> . C_INT
+    (70) factor -> . MINUS C_INT
+    (71) factor -> . C_FLOAT
+    (72) factor -> . MINUS C_FLOAT
+    (73) factor -> . C_CHAR
+    (74) factor -> . ID
+    (75) factor -> . dimvars
+    (76) factor -> . ID LPAREN exprs RPAREN
+    (10) dimvars -> . ID dimensions
+
+    C_INT           shift and go to state 73
+    MINUS           shift and go to state 71
+    C_FLOAT         shift and go to state 74
+    C_CHAR          shift and go to state 75
+    ID              shift and go to state 76
+
+    expr                           shift and go to state 153
+    term                           shift and go to state 70
+    factor                         shift and go to state 72
+    dimvars                        shift and go to state 77
+
+state 129
+
+    (50) conditional -> WHILE LPAREN logic RPAREN . DO LCURLY statutes SEMI RCURLY
+
+    DO              shift and go to state 154
+
+
+state 130
+
+    (51) nonconditional -> FOR expr EQUALS expr . TO expr DO LCURLY statutes SEMI RCURLY
+    (63) expr -> expr . PLUS term
+    (64) expr -> expr . MINUS term
+
+    TO              shift and go to state 155
+    PLUS            shift and go to state 100
+    MINUS           shift and go to state 101
+
+
+state 131
+
+    (63) expr -> expr PLUS term .
+    (66) term -> term . TIMES factor
+    (67) term -> term . DIVIDE factor
+
+    EQUALS          reduce using rule 63 (expr -> expr PLUS term .)
+    PLUS            reduce using rule 63 (expr -> expr PLUS term .)
+    MINUS           reduce using rule 63 (expr -> expr PLUS term .)
+    RBRACK          reduce using rule 63 (expr -> expr PLUS term .)
+    SEMI            reduce using rule 63 (expr -> expr PLUS term .)
+    COMMA           reduce using rule 63 (expr -> expr PLUS term .)
+    RPAREN          reduce using rule 63 (expr -> expr PLUS term .)
+    GREATER         reduce using rule 63 (expr -> expr PLUS term .)
+    GREATER_EQ      reduce using rule 63 (expr -> expr PLUS term .)
+    LESSER          reduce using rule 63 (expr -> expr PLUS term .)
+    LESSER_EQ       reduce using rule 63 (expr -> expr PLUS term .)
+    COMPARE         reduce using rule 63 (expr -> expr PLUS term .)
+    DIFFERENT       reduce using rule 63 (expr -> expr PLUS term .)
+    TO              reduce using rule 63 (expr -> expr PLUS term .)
+    AND             reduce using rule 63 (expr -> expr PLUS term .)
+    OR              reduce using rule 63 (expr -> expr PLUS term .)
+    DO              reduce using rule 63 (expr -> expr PLUS term .)
+    TIMES           shift and go to state 102
+    DIVIDE          shift and go to state 103
+
+
+state 132
+
+    (64) expr -> expr MINUS term .
+    (66) term -> term . TIMES factor
+    (67) term -> term . DIVIDE factor
+
+    EQUALS          reduce using rule 64 (expr -> expr MINUS term .)
+    PLUS            reduce using rule 64 (expr -> expr MINUS term .)
+    MINUS           reduce using rule 64 (expr -> expr MINUS term .)
+    RBRACK          reduce using rule 64 (expr -> expr MINUS term .)
+    SEMI            reduce using rule 64 (expr -> expr MINUS term .)
+    COMMA           reduce using rule 64 (expr -> expr MINUS term .)
+    RPAREN          reduce using rule 64 (expr -> expr MINUS term .)
+    GREATER         reduce using rule 64 (expr -> expr MINUS term .)
+    GREATER_EQ      reduce using rule 64 (expr -> expr MINUS term .)
+    LESSER          reduce using rule 64 (expr -> expr MINUS term .)
+    LESSER_EQ       reduce using rule 64 (expr -> expr MINUS term .)
+    COMPARE         reduce using rule 64 (expr -> expr MINUS term .)
+    DIFFERENT       reduce using rule 64 (expr -> expr MINUS term .)
+    TO              reduce using rule 64 (expr -> expr MINUS term .)
+    AND             reduce using rule 64 (expr -> expr MINUS term .)
+    OR              reduce using rule 64 (expr -> expr MINUS term .)
+    DO              reduce using rule 64 (expr -> expr MINUS term .)
+    TIMES           shift and go to state 102
+    DIVIDE          shift and go to state 103
+
+
+state 133
+
+    (66) term -> term TIMES factor .
+
+    TIMES           reduce using rule 66 (term -> term TIMES factor .)
+    DIVIDE          reduce using rule 66 (term -> term TIMES factor .)
+    EQUALS          reduce using rule 66 (term -> term TIMES factor .)
+    PLUS            reduce using rule 66 (term -> term TIMES factor .)
+    MINUS           reduce using rule 66 (term -> term TIMES factor .)
+    RBRACK          reduce using rule 66 (term -> term TIMES factor .)
+    SEMI            reduce using rule 66 (term -> term TIMES factor .)
+    COMMA           reduce using rule 66 (term -> term TIMES factor .)
+    RPAREN          reduce using rule 66 (term -> term TIMES factor .)
+    GREATER         reduce using rule 66 (term -> term TIMES factor .)
+    GREATER_EQ      reduce using rule 66 (term -> term TIMES factor .)
+    LESSER          reduce using rule 66 (term -> term TIMES factor .)
+    LESSER_EQ       reduce using rule 66 (term -> term TIMES factor .)
+    COMPARE         reduce using rule 66 (term -> term TIMES factor .)
+    DIFFERENT       reduce using rule 66 (term -> term TIMES factor .)
+    TO              reduce using rule 66 (term -> term TIMES factor .)
+    AND             reduce using rule 66 (term -> term TIMES factor .)
+    OR              reduce using rule 66 (term -> term TIMES factor .)
+    DO              reduce using rule 66 (term -> term TIMES factor .)
+
+
+state 134
+
+    (67) term -> term DIVIDE factor .
+
+    TIMES           reduce using rule 67 (term -> term DIVIDE factor .)
+    DIVIDE          reduce using rule 67 (term -> term DIVIDE factor .)
+    EQUALS          reduce using rule 67 (term -> term DIVIDE factor .)
+    PLUS            reduce using rule 67 (term -> term DIVIDE factor .)
+    MINUS           reduce using rule 67 (term -> term DIVIDE factor .)
+    RBRACK          reduce using rule 67 (term -> term DIVIDE factor .)
+    SEMI            reduce using rule 67 (term -> term DIVIDE factor .)
+    COMMA           reduce using rule 67 (term -> term DIVIDE factor .)
+    RPAREN          reduce using rule 67 (term -> term DIVIDE factor .)
+    GREATER         reduce using rule 67 (term -> term DIVIDE factor .)
+    GREATER_EQ      reduce using rule 67 (term -> term DIVIDE factor .)
+    LESSER          reduce using rule 67 (term -> term DIVIDE factor .)
+    LESSER_EQ       reduce using rule 67 (term -> term DIVIDE factor .)
+    COMPARE         reduce using rule 67 (term -> term DIVIDE factor .)
+    DIFFERENT       reduce using rule 67 (term -> term DIVIDE factor .)
+    TO              reduce using rule 67 (term -> term DIVIDE factor .)
+    AND             reduce using rule 67 (term -> term DIVIDE factor .)
+    OR              reduce using rule 67 (term -> term DIVIDE factor .)
+    DO              reduce using rule 67 (term -> term DIVIDE factor .)
+
+
+state 135
+
+    (76) factor -> ID LPAREN exprs . RPAREN
+
+    RPAREN          shift and go to state 156
+
+
+state 136
+
+    (36) params -> type COLON multivars .
+    (37) params -> type COLON multivars . SEMI params
+
+    RPAREN          reduce using rule 36 (params -> type COLON multivars .)
+    SEMI            shift and go to state 157
+
+
+state 137
+
+    (12) dimensions -> LBRACK expr RBRACK dimensions .
+
+    COMMA           reduce using rule 12 (dimensions -> LBRACK expr RBRACK dimensions .)
+    SEMI            reduce using rule 12 (dimensions -> LBRACK expr RBRACK dimensions .)
+    RPAREN          reduce using rule 12 (dimensions -> LBRACK expr RBRACK dimensions .)
+    EQUALS          reduce using rule 12 (dimensions -> LBRACK expr RBRACK dimensions .)
+    TIMES           reduce using rule 12 (dimensions -> LBRACK expr RBRACK dimensions .)
+    DIVIDE          reduce using rule 12 (dimensions -> LBRACK expr RBRACK dimensions .)
+    PLUS            reduce using rule 12 (dimensions -> LBRACK expr RBRACK dimensions .)
+    MINUS           reduce using rule 12 (dimensions -> LBRACK expr RBRACK dimensions .)
+    RBRACK          reduce using rule 12 (dimensions -> LBRACK expr RBRACK dimensions .)
+    GREATER         reduce using rule 12 (dimensions -> LBRACK expr RBRACK dimensions .)
+    GREATER_EQ      reduce using rule 12 (dimensions -> LBRACK expr RBRACK dimensions .)
+    LESSER          reduce using rule 12 (dimensions -> LBRACK expr RBRACK dimensions .)
+    LESSER_EQ       reduce using rule 12 (dimensions -> LBRACK expr RBRACK dimensions .)
+    COMPARE         reduce using rule 12 (dimensions -> LBRACK expr RBRACK dimensions .)
+    DIFFERENT       reduce using rule 12 (dimensions -> LBRACK expr RBRACK dimensions .)
+    TO              reduce using rule 12 (dimensions -> LBRACK expr RBRACK dimensions .)
+    AND             reduce using rule 12 (dimensions -> LBRACK expr RBRACK dimensions .)
+    OR              reduce using rule 12 (dimensions -> LBRACK expr RBRACK dimensions .)
+    DO              reduce using rule 12 (dimensions -> LBRACK expr RBRACK dimensions .)
+
+
+state 138
+
+    (40) call_void -> ID LPAREN exprs RPAREN SEMI .
+
+    ID              reduce using rule 40 (call_void -> ID LPAREN exprs RPAREN SEMI .)
+    RETURN          reduce using rule 40 (call_void -> ID LPAREN exprs RPAREN SEMI .)
+    READ            reduce using rule 40 (call_void -> ID LPAREN exprs RPAREN SEMI .)
+    WRITE           reduce using rule 40 (call_void -> ID LPAREN exprs RPAREN SEMI .)
+    IF              reduce using rule 40 (call_void -> ID LPAREN exprs RPAREN SEMI .)
+    WHILE           reduce using rule 40 (call_void -> ID LPAREN exprs RPAREN SEMI .)
+    FOR             reduce using rule 40 (call_void -> ID LPAREN exprs RPAREN SEMI .)
+    RCURLY          reduce using rule 40 (call_void -> ID LPAREN exprs RPAREN SEMI .)
+    SEMI            reduce using rule 40 (call_void -> ID LPAREN exprs RPAREN SEMI .)
+
+
+state 139
+
+    (62) exprs -> expr COMMA exprs .
+
+    RPAREN          reduce using rule 62 (exprs -> expr COMMA exprs .)
+    COMMA           reduce using rule 62 (exprs -> expr COMMA exprs .)
+
+
+state 140
+
+    (41) returning -> RETURN LPAREN expr RPAREN SEMI .
+
+    RCURLY          reduce using rule 41 (returning -> RETURN LPAREN expr RPAREN SEMI .)
+    SEMI            reduce using rule 41 (returning -> RETURN LPAREN expr RPAREN SEMI .)
+
+
+state 141
+
+    (42) reading -> READ LPAREN multivars RPAREN SEMI .
+
+    ID              reduce using rule 42 (reading -> READ LPAREN multivars RPAREN SEMI .)
+    RETURN          reduce using rule 42 (reading -> READ LPAREN multivars RPAREN SEMI .)
+    READ            reduce using rule 42 (reading -> READ LPAREN multivars RPAREN SEMI .)
+    WRITE           reduce using rule 42 (reading -> READ LPAREN multivars RPAREN SEMI .)
+    IF              reduce using rule 42 (reading -> READ LPAREN multivars RPAREN SEMI .)
+    WHILE           reduce using rule 42 (reading -> READ LPAREN multivars RPAREN SEMI .)
+    FOR             reduce using rule 42 (reading -> READ LPAREN multivars RPAREN SEMI .)
+    RCURLY          reduce using rule 42 (reading -> READ LPAREN multivars RPAREN SEMI .)
+    SEMI            reduce using rule 42 (reading -> READ LPAREN multivars RPAREN SEMI .)
+
+
+state 142
+
+    (43) writing -> WRITE LPAREN write_opt RPAREN SEMI .
+
+    ID              reduce using rule 43 (writing -> WRITE LPAREN write_opt RPAREN SEMI .)
+    RETURN          reduce using rule 43 (writing -> WRITE LPAREN write_opt RPAREN SEMI .)
+    READ            reduce using rule 43 (writing -> WRITE LPAREN write_opt RPAREN SEMI .)
+    WRITE           reduce using rule 43 (writing -> WRITE LPAREN write_opt RPAREN SEMI .)
+    IF              reduce using rule 43 (writing -> WRITE LPAREN write_opt RPAREN SEMI .)
+    WHILE           reduce using rule 43 (writing -> WRITE LPAREN write_opt RPAREN SEMI .)
+    FOR             reduce using rule 43 (writing -> WRITE LPAREN write_opt RPAREN SEMI .)
+    RCURLY          reduce using rule 43 (writing -> WRITE LPAREN write_opt RPAREN SEMI .)
+    SEMI            reduce using rule 43 (writing -> WRITE LPAREN write_opt RPAREN SEMI .)
+
+
+state 143
+
+    (44) write_opt -> QUOTE MESSAGE QUOTE .
+    (45) write_opt -> QUOTE MESSAGE QUOTE . COMMA write_opt
+
+    RPAREN          reduce using rule 44 (write_opt -> QUOTE MESSAGE QUOTE .)
+    COMMA           shift and go to state 158
+
+
+state 144
+
+    (47) write_opt -> exprs COMMA write_opt .
+
+    RPAREN          reduce using rule 47 (write_opt -> exprs COMMA write_opt .)
+
+
+state 145
+
+    (48) decision -> IF LPAREN logic RPAREN THEN . LCURLY statutes SEMI RCURLY
+    (49) decision -> IF LPAREN logic RPAREN THEN . LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY
+
+    LCURLY          shift and go to state 159
+
+
+state 146
+
+    (58) logic -> relation AND relation .
+
+    RPAREN          reduce using rule 58 (logic -> relation AND relation .)
+
+
+state 147
+
+    (59) logic -> relation OR relation .
+
+    RPAREN          reduce using rule 59 (logic -> relation OR relation .)
+
+
+state 148
+
+    (52) relation -> expr GREATER expr .
+    (63) expr -> expr . PLUS term
+    (64) expr -> expr . MINUS term
+
+    AND             reduce using rule 52 (relation -> expr GREATER expr .)
+    OR              reduce using rule 52 (relation -> expr GREATER expr .)
+    RPAREN          reduce using rule 52 (relation -> expr GREATER expr .)
+    PLUS            shift and go to state 100
+    MINUS           shift and go to state 101
+
+
+state 149
+
+    (53) relation -> expr GREATER_EQ expr .
+    (63) expr -> expr . PLUS term
+    (64) expr -> expr . MINUS term
+
+    AND             reduce using rule 53 (relation -> expr GREATER_EQ expr .)
+    OR              reduce using rule 53 (relation -> expr GREATER_EQ expr .)
+    RPAREN          reduce using rule 53 (relation -> expr GREATER_EQ expr .)
+    PLUS            shift and go to state 100
+    MINUS           shift and go to state 101
+
+
+state 150
+
+    (54) relation -> expr LESSER expr .
+    (63) expr -> expr . PLUS term
+    (64) expr -> expr . MINUS term
+
+    AND             reduce using rule 54 (relation -> expr LESSER expr .)
+    OR              reduce using rule 54 (relation -> expr LESSER expr .)
+    RPAREN          reduce using rule 54 (relation -> expr LESSER expr .)
+    PLUS            shift and go to state 100
+    MINUS           shift and go to state 101
+
+
+state 151
+
+    (55) relation -> expr LESSER_EQ expr .
+    (63) expr -> expr . PLUS term
+    (64) expr -> expr . MINUS term
+
+    AND             reduce using rule 55 (relation -> expr LESSER_EQ expr .)
+    OR              reduce using rule 55 (relation -> expr LESSER_EQ expr .)
+    RPAREN          reduce using rule 55 (relation -> expr LESSER_EQ expr .)
+    PLUS            shift and go to state 100
+    MINUS           shift and go to state 101
+
+
+state 152
+
+    (56) relation -> expr COMPARE expr .
+    (63) expr -> expr . PLUS term
+    (64) expr -> expr . MINUS term
+
+    AND             reduce using rule 56 (relation -> expr COMPARE expr .)
+    OR              reduce using rule 56 (relation -> expr COMPARE expr .)
+    RPAREN          reduce using rule 56 (relation -> expr COMPARE expr .)
+    PLUS            shift and go to state 100
+    MINUS           shift and go to state 101
+
+
+state 153
+
+    (57) relation -> expr DIFFERENT expr .
+    (63) expr -> expr . PLUS term
+    (64) expr -> expr . MINUS term
+
+    AND             reduce using rule 57 (relation -> expr DIFFERENT expr .)
+    OR              reduce using rule 57 (relation -> expr DIFFERENT expr .)
+    RPAREN          reduce using rule 57 (relation -> expr DIFFERENT expr .)
+    PLUS            shift and go to state 100
+    MINUS           shift and go to state 101
+
+
+state 154
+
+    (50) conditional -> WHILE LPAREN logic RPAREN DO . LCURLY statutes SEMI RCURLY
+
+    LCURLY          shift and go to state 160
+
+
+state 155
+
+    (51) nonconditional -> FOR expr EQUALS expr TO . expr DO LCURLY statutes SEMI RCURLY
+    (63) expr -> . expr PLUS term
+    (64) expr -> . expr MINUS term
+    (65) expr -> . term
+    (66) term -> . term TIMES factor
+    (67) term -> . term DIVIDE factor
+    (68) term -> . factor
+    (69) factor -> . C_INT
+    (70) factor -> . MINUS C_INT
+    (71) factor -> . C_FLOAT
+    (72) factor -> . MINUS C_FLOAT
+    (73) factor -> . C_CHAR
+    (74) factor -> . ID
+    (75) factor -> . dimvars
+    (76) factor -> . ID LPAREN exprs RPAREN
+    (10) dimvars -> . ID dimensions
+
+    C_INT           shift and go to state 73
+    MINUS           shift and go to state 71
+    C_FLOAT         shift and go to state 74
+    C_CHAR          shift and go to state 75
+    ID              shift and go to state 76
+
+    expr                           shift and go to state 161
+    term                           shift and go to state 70
+    factor                         shift and go to state 72
+    dimvars                        shift and go to state 77
+
+state 156
+
+    (76) factor -> ID LPAREN exprs RPAREN .
+
+    TIMES           reduce using rule 76 (factor -> ID LPAREN exprs RPAREN .)
+    DIVIDE          reduce using rule 76 (factor -> ID LPAREN exprs RPAREN .)
+    EQUALS          reduce using rule 76 (factor -> ID LPAREN exprs RPAREN .)
+    PLUS            reduce using rule 76 (factor -> ID LPAREN exprs RPAREN .)
+    MINUS           reduce using rule 76 (factor -> ID LPAREN exprs RPAREN .)
+    RBRACK          reduce using rule 76 (factor -> ID LPAREN exprs RPAREN .)
+    SEMI            reduce using rule 76 (factor -> ID LPAREN exprs RPAREN .)
+    COMMA           reduce using rule 76 (factor -> ID LPAREN exprs RPAREN .)
+    RPAREN          reduce using rule 76 (factor -> ID LPAREN exprs RPAREN .)
+    GREATER         reduce using rule 76 (factor -> ID LPAREN exprs RPAREN .)
+    GREATER_EQ      reduce using rule 76 (factor -> ID LPAREN exprs RPAREN .)
+    LESSER          reduce using rule 76 (factor -> ID LPAREN exprs RPAREN .)
+    LESSER_EQ       reduce using rule 76 (factor -> ID LPAREN exprs RPAREN .)
+    COMPARE         reduce using rule 76 (factor -> ID LPAREN exprs RPAREN .)
+    DIFFERENT       reduce using rule 76 (factor -> ID LPAREN exprs RPAREN .)
+    TO              reduce using rule 76 (factor -> ID LPAREN exprs RPAREN .)
+    AND             reduce using rule 76 (factor -> ID LPAREN exprs RPAREN .)
+    OR              reduce using rule 76 (factor -> ID LPAREN exprs RPAREN .)
+    DO              reduce using rule 76 (factor -> ID LPAREN exprs RPAREN .)
+
+
+state 157
+
+    (37) params -> type COLON multivars SEMI . params
+    (36) params -> . type COLON multivars
+    (37) params -> . type COLON multivars SEMI params
+    (2) type -> . INT
+    (3) type -> . FLOAT
+    (4) type -> . CHAR
+
+    INT             shift and go to state 11
+    FLOAT           shift and go to state 12
+    CHAR            shift and go to state 13
+
+    type                           shift and go to state 80
+    params                         shift and go to state 162
+
+state 158
+
+    (45) write_opt -> QUOTE MESSAGE QUOTE COMMA . write_opt
+    (44) write_opt -> . QUOTE MESSAGE QUOTE
+    (45) write_opt -> . QUOTE MESSAGE QUOTE COMMA write_opt
+    (46) write_opt -> . exprs
+    (47) write_opt -> . exprs COMMA write_opt
+    (61) exprs -> . expr
+    (62) exprs -> . expr COMMA exprs
+    (63) expr -> . expr PLUS term
+    (64) expr -> . expr MINUS term
+    (65) expr -> . term
+    (66) term -> . term TIMES factor
+    (67) term -> . term DIVIDE factor
+    (68) term -> . factor
+    (69) factor -> . C_INT
+    (70) factor -> . MINUS C_INT
+    (71) factor -> . C_FLOAT
+    (72) factor -> . MINUS C_FLOAT
+    (73) factor -> . C_CHAR
+    (74) factor -> . ID
+    (75) factor -> . dimvars
+    (76) factor -> . ID LPAREN exprs RPAREN
+    (10) dimvars -> . ID dimensions
+
+    QUOTE           shift and go to state 93
+    C_INT           shift and go to state 73
+    MINUS           shift and go to state 71
+    C_FLOAT         shift and go to state 74
+    C_CHAR          shift and go to state 75
+    ID              shift and go to state 76
+
+    write_opt                      shift and go to state 163
+    exprs                          shift and go to state 94
+    expr                           shift and go to state 88
+    term                           shift and go to state 70
+    factor                         shift and go to state 72
+    dimvars                        shift and go to state 77
+
+state 159
+
+    (48) decision -> IF LPAREN logic RPAREN THEN LCURLY . statutes SEMI RCURLY
+    (49) decision -> IF LPAREN logic RPAREN THEN LCURLY . statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY
+    (21) statutes -> . assign
+    (22) statutes -> . assign statutes
+    (23) statutes -> . call_void
+    (24) statutes -> . call_void statutes
+    (25) statutes -> . returning
+    (26) statutes -> . reading
+    (27) statutes -> . reading statutes
+    (28) statutes -> . writing
+    (29) statutes -> . writing statutes
+    (30) statutes -> . decision
+    (31) statutes -> . decision statutes
+    (32) statutes -> . conditional
+    (33) statutes -> . conditional statutes
+    (34) statutes -> . nonconditional
+    (35) statutes -> . nonconditional statutes
+    (38) assign -> . ID EQUALS expr SEMI
+    (39) assign -> . dimvars EQUALS expr SEMI
+    (40) call_void -> . ID LPAREN exprs RPAREN SEMI
+    (41) returning -> . RETURN LPAREN expr RPAREN SEMI
+    (42) reading -> . READ LPAREN multivars RPAREN SEMI
+    (43) writing -> . WRITE LPAREN write_opt RPAREN SEMI
+    (48) decision -> . IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY
+    (49) decision -> . IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY
+    (50) conditional -> . WHILE LPAREN logic RPAREN DO LCURLY statutes SEMI RCURLY
+    (51) nonconditional -> . FOR expr EQUALS expr TO expr DO LCURLY statutes SEMI RCURLY
+    (10) dimvars -> . ID dimensions
+
+    ID              shift and go to state 38
+    RETURN          shift and go to state 40
+    READ            shift and go to state 41
+    WRITE           shift and go to state 42
+    IF              shift and go to state 43
+    WHILE           shift and go to state 44
+    FOR             shift and go to state 45
+
+    statutes                       shift and go to state 164
+    assign                         shift and go to state 30
+    call_void                      shift and go to state 31
+    returning                      shift and go to state 32
+    reading                        shift and go to state 33
+    writing                        shift and go to state 34
+    decision                       shift and go to state 35
+    conditional                    shift and go to state 36
+    nonconditional                 shift and go to state 37
+    dimvars                        shift and go to state 39
+
+state 160
+
+    (50) conditional -> WHILE LPAREN logic RPAREN DO LCURLY . statutes SEMI RCURLY
+    (21) statutes -> . assign
+    (22) statutes -> . assign statutes
+    (23) statutes -> . call_void
+    (24) statutes -> . call_void statutes
+    (25) statutes -> . returning
+    (26) statutes -> . reading
+    (27) statutes -> . reading statutes
+    (28) statutes -> . writing
+    (29) statutes -> . writing statutes
+    (30) statutes -> . decision
+    (31) statutes -> . decision statutes
+    (32) statutes -> . conditional
+    (33) statutes -> . conditional statutes
+    (34) statutes -> . nonconditional
+    (35) statutes -> . nonconditional statutes
+    (38) assign -> . ID EQUALS expr SEMI
+    (39) assign -> . dimvars EQUALS expr SEMI
+    (40) call_void -> . ID LPAREN exprs RPAREN SEMI
+    (41) returning -> . RETURN LPAREN expr RPAREN SEMI
+    (42) reading -> . READ LPAREN multivars RPAREN SEMI
+    (43) writing -> . WRITE LPAREN write_opt RPAREN SEMI
+    (48) decision -> . IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY
+    (49) decision -> . IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY
+    (50) conditional -> . WHILE LPAREN logic RPAREN DO LCURLY statutes SEMI RCURLY
+    (51) nonconditional -> . FOR expr EQUALS expr TO expr DO LCURLY statutes SEMI RCURLY
+    (10) dimvars -> . ID dimensions
+
+    ID              shift and go to state 38
+    RETURN          shift and go to state 40
+    READ            shift and go to state 41
+    WRITE           shift and go to state 42
+    IF              shift and go to state 43
+    WHILE           shift and go to state 44
+    FOR             shift and go to state 45
+
+    statutes                       shift and go to state 165
+    assign                         shift and go to state 30
+    call_void                      shift and go to state 31
+    returning                      shift and go to state 32
+    reading                        shift and go to state 33
+    writing                        shift and go to state 34
+    decision                       shift and go to state 35
+    conditional                    shift and go to state 36
+    nonconditional                 shift and go to state 37
+    dimvars                        shift and go to state 39
+
+state 161
+
+    (51) nonconditional -> FOR expr EQUALS expr TO expr . DO LCURLY statutes SEMI RCURLY
+    (63) expr -> expr . PLUS term
+    (64) expr -> expr . MINUS term
+
+    DO              shift and go to state 166
+    PLUS            shift and go to state 100
+    MINUS           shift and go to state 101
+
+
+state 162
+
+    (37) params -> type COLON multivars SEMI params .
+
+    RPAREN          reduce using rule 37 (params -> type COLON multivars SEMI params .)
+
+
+state 163
+
+    (45) write_opt -> QUOTE MESSAGE QUOTE COMMA write_opt .
+
+    RPAREN          reduce using rule 45 (write_opt -> QUOTE MESSAGE QUOTE COMMA write_opt .)
+
+
+state 164
+
+    (48) decision -> IF LPAREN logic RPAREN THEN LCURLY statutes . SEMI RCURLY
+    (49) decision -> IF LPAREN logic RPAREN THEN LCURLY statutes . SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY
+
+    SEMI            shift and go to state 167
+
+
+state 165
+
+    (50) conditional -> WHILE LPAREN logic RPAREN DO LCURLY statutes . SEMI RCURLY
+
+    SEMI            shift and go to state 168
+
+
+state 166
+
+    (51) nonconditional -> FOR expr EQUALS expr TO expr DO . LCURLY statutes SEMI RCURLY
+
+    LCURLY          shift and go to state 169
+
+
+state 167
+
+    (48) decision -> IF LPAREN logic RPAREN THEN LCURLY statutes SEMI . RCURLY
+    (49) decision -> IF LPAREN logic RPAREN THEN LCURLY statutes SEMI . RCURLY ELSE LCURLY statutes SEMI RCURLY
+
+    RCURLY          shift and go to state 170
+
+
+state 168
+
+    (50) conditional -> WHILE LPAREN logic RPAREN DO LCURLY statutes SEMI . RCURLY
+
+    RCURLY          shift and go to state 171
+
+
+state 169
+
+    (51) nonconditional -> FOR expr EQUALS expr TO expr DO LCURLY . statutes SEMI RCURLY
+    (21) statutes -> . assign
+    (22) statutes -> . assign statutes
+    (23) statutes -> . call_void
+    (24) statutes -> . call_void statutes
+    (25) statutes -> . returning
+    (26) statutes -> . reading
+    (27) statutes -> . reading statutes
+    (28) statutes -> . writing
+    (29) statutes -> . writing statutes
+    (30) statutes -> . decision
+    (31) statutes -> . decision statutes
+    (32) statutes -> . conditional
+    (33) statutes -> . conditional statutes
+    (34) statutes -> . nonconditional
+    (35) statutes -> . nonconditional statutes
+    (38) assign -> . ID EQUALS expr SEMI
+    (39) assign -> . dimvars EQUALS expr SEMI
+    (40) call_void -> . ID LPAREN exprs RPAREN SEMI
+    (41) returning -> . RETURN LPAREN expr RPAREN SEMI
+    (42) reading -> . READ LPAREN multivars RPAREN SEMI
+    (43) writing -> . WRITE LPAREN write_opt RPAREN SEMI
+    (48) decision -> . IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY
+    (49) decision -> . IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY
+    (50) conditional -> . WHILE LPAREN logic RPAREN DO LCURLY statutes SEMI RCURLY
+    (51) nonconditional -> . FOR expr EQUALS expr TO expr DO LCURLY statutes SEMI RCURLY
+    (10) dimvars -> . ID dimensions
+
+    ID              shift and go to state 38
+    RETURN          shift and go to state 40
+    READ            shift and go to state 41
+    WRITE           shift and go to state 42
+    IF              shift and go to state 43
+    WHILE           shift and go to state 44
+    FOR             shift and go to state 45
+
+    statutes                       shift and go to state 172
+    assign                         shift and go to state 30
+    call_void                      shift and go to state 31
+    returning                      shift and go to state 32
+    reading                        shift and go to state 33
+    writing                        shift and go to state 34
+    decision                       shift and go to state 35
+    conditional                    shift and go to state 36
+    nonconditional                 shift and go to state 37
+    dimvars                        shift and go to state 39
+
+state 170
+
+    (48) decision -> IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY .
+    (49) decision -> IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY . ELSE LCURLY statutes SEMI RCURLY
+
+    ID              reduce using rule 48 (decision -> IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY .)
+    RETURN          reduce using rule 48 (decision -> IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY .)
+    READ            reduce using rule 48 (decision -> IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY .)
+    WRITE           reduce using rule 48 (decision -> IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY .)
+    IF              reduce using rule 48 (decision -> IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY .)
+    WHILE           reduce using rule 48 (decision -> IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY .)
+    FOR             reduce using rule 48 (decision -> IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY .)
+    RCURLY          reduce using rule 48 (decision -> IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY .)
+    SEMI            reduce using rule 48 (decision -> IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY .)
+    ELSE            shift and go to state 173
+
+
+state 171
+
+    (50) conditional -> WHILE LPAREN logic RPAREN DO LCURLY statutes SEMI RCURLY .
+
+    ID              reduce using rule 50 (conditional -> WHILE LPAREN logic RPAREN DO LCURLY statutes SEMI RCURLY .)
+    RETURN          reduce using rule 50 (conditional -> WHILE LPAREN logic RPAREN DO LCURLY statutes SEMI RCURLY .)
+    READ            reduce using rule 50 (conditional -> WHILE LPAREN logic RPAREN DO LCURLY statutes SEMI RCURLY .)
+    WRITE           reduce using rule 50 (conditional -> WHILE LPAREN logic RPAREN DO LCURLY statutes SEMI RCURLY .)
+    IF              reduce using rule 50 (conditional -> WHILE LPAREN logic RPAREN DO LCURLY statutes SEMI RCURLY .)
+    WHILE           reduce using rule 50 (conditional -> WHILE LPAREN logic RPAREN DO LCURLY statutes SEMI RCURLY .)
+    FOR             reduce using rule 50 (conditional -> WHILE LPAREN logic RPAREN DO LCURLY statutes SEMI RCURLY .)
+    RCURLY          reduce using rule 50 (conditional -> WHILE LPAREN logic RPAREN DO LCURLY statutes SEMI RCURLY .)
+    SEMI            reduce using rule 50 (conditional -> WHILE LPAREN logic RPAREN DO LCURLY statutes SEMI RCURLY .)
+
+
+state 172
+
+    (51) nonconditional -> FOR expr EQUALS expr TO expr DO LCURLY statutes . SEMI RCURLY
+
+    SEMI            shift and go to state 174
+
+
+state 173
+
+    (49) decision -> IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE . LCURLY statutes SEMI RCURLY
+
+    LCURLY          shift and go to state 175
+
+
+state 174
+
+    (51) nonconditional -> FOR expr EQUALS expr TO expr DO LCURLY statutes SEMI . RCURLY
+
+    RCURLY          shift and go to state 176
+
+
+state 175
+
+    (49) decision -> IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY . statutes SEMI RCURLY
+    (21) statutes -> . assign
+    (22) statutes -> . assign statutes
+    (23) statutes -> . call_void
+    (24) statutes -> . call_void statutes
+    (25) statutes -> . returning
+    (26) statutes -> . reading
+    (27) statutes -> . reading statutes
+    (28) statutes -> . writing
+    (29) statutes -> . writing statutes
+    (30) statutes -> . decision
+    (31) statutes -> . decision statutes
+    (32) statutes -> . conditional
+    (33) statutes -> . conditional statutes
+    (34) statutes -> . nonconditional
+    (35) statutes -> . nonconditional statutes
+    (38) assign -> . ID EQUALS expr SEMI
+    (39) assign -> . dimvars EQUALS expr SEMI
+    (40) call_void -> . ID LPAREN exprs RPAREN SEMI
+    (41) returning -> . RETURN LPAREN expr RPAREN SEMI
+    (42) reading -> . READ LPAREN multivars RPAREN SEMI
+    (43) writing -> . WRITE LPAREN write_opt RPAREN SEMI
+    (48) decision -> . IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY
+    (49) decision -> . IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY
+    (50) conditional -> . WHILE LPAREN logic RPAREN DO LCURLY statutes SEMI RCURLY
+    (51) nonconditional -> . FOR expr EQUALS expr TO expr DO LCURLY statutes SEMI RCURLY
+    (10) dimvars -> . ID dimensions
+
+    ID              shift and go to state 38
+    RETURN          shift and go to state 40
+    READ            shift and go to state 41
+    WRITE           shift and go to state 42
+    IF              shift and go to state 43
+    WHILE           shift and go to state 44
+    FOR             shift and go to state 45
+
+    statutes                       shift and go to state 177
+    assign                         shift and go to state 30
+    call_void                      shift and go to state 31
+    returning                      shift and go to state 32
+    reading                        shift and go to state 33
+    writing                        shift and go to state 34
+    decision                       shift and go to state 35
+    conditional                    shift and go to state 36
+    nonconditional                 shift and go to state 37
+    dimvars                        shift and go to state 39
+
+state 176
+
+    (51) nonconditional -> FOR expr EQUALS expr TO expr DO LCURLY statutes SEMI RCURLY .
+
+    ID              reduce using rule 51 (nonconditional -> FOR expr EQUALS expr TO expr DO LCURLY statutes SEMI RCURLY .)
+    RETURN          reduce using rule 51 (nonconditional -> FOR expr EQUALS expr TO expr DO LCURLY statutes SEMI RCURLY .)
+    READ            reduce using rule 51 (nonconditional -> FOR expr EQUALS expr TO expr DO LCURLY statutes SEMI RCURLY .)
+    WRITE           reduce using rule 51 (nonconditional -> FOR expr EQUALS expr TO expr DO LCURLY statutes SEMI RCURLY .)
+    IF              reduce using rule 51 (nonconditional -> FOR expr EQUALS expr TO expr DO LCURLY statutes SEMI RCURLY .)
+    WHILE           reduce using rule 51 (nonconditional -> FOR expr EQUALS expr TO expr DO LCURLY statutes SEMI RCURLY .)
+    FOR             reduce using rule 51 (nonconditional -> FOR expr EQUALS expr TO expr DO LCURLY statutes SEMI RCURLY .)
+    RCURLY          reduce using rule 51 (nonconditional -> FOR expr EQUALS expr TO expr DO LCURLY statutes SEMI RCURLY .)
+    SEMI            reduce using rule 51 (nonconditional -> FOR expr EQUALS expr TO expr DO LCURLY statutes SEMI RCURLY .)
+
+
+state 177
+
+    (49) decision -> IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes . SEMI RCURLY
+
+    SEMI            shift and go to state 178
+
+
+state 178
+
+    (49) decision -> IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI . RCURLY
+
+    RCURLY          shift and go to state 179
+
+
+state 179
+
+    (49) decision -> IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY .
+
+    ID              reduce using rule 49 (decision -> IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY .)
+    RETURN          reduce using rule 49 (decision -> IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY .)
+    READ            reduce using rule 49 (decision -> IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY .)
+    WRITE           reduce using rule 49 (decision -> IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY .)
+    IF              reduce using rule 49 (decision -> IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY .)
+    WHILE           reduce using rule 49 (decision -> IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY .)
+    FOR             reduce using rule 49 (decision -> IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY .)
+    RCURLY          reduce using rule 49 (decision -> IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY .)
+    SEMI            reduce using rule 49 (decision -> IF LPAREN logic RPAREN THEN LCURLY statutes SEMI RCURLY ELSE LCURLY statutes SEMI RCURLY .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for COMMA in state 88 resolved as shift

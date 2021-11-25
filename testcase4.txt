@@ -1,0 +1,24 @@
+program Find;
+vars
+int : list[5], x, n, i, flag;
+
+main() {
+n = 5;
+flag = 0;
+
+read(list[0]);
+read(list[1]);
+read(list[2]);
+read(list[3]);
+read(list[4]);
+
+read(x);
+
+for i = 0 to n do {
+    if (list[i] == x) then {
+        write(i); 
+        flag = 1; } }
+
+if (flag == 0) then {
+write("Element does not exist within list."); }
+}

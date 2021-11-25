@@ -1,0 +1,37 @@
+program Fibonacci;
+vars
+int : number, count;
+
+function int fibo1 (int: n) 
+{
+if (n <= 1) then {
+    return(n); }
+else {
+    return(fibo1(n-1) + fibo1(n-2)); }
+}
+
+function int fibo2 (int: n) 
+vars
+int : x, y, z, i;
+{
+    x = 0;
+    y = 1;
+    z = 1;
+    for i = 0 to n do {
+    x = y;
+    y = z;
+    z = x + y; }
+return(x);
+}
+
+main() {
+read(number);
+
+for count = 1 to number + 1 do {
+    write(fibo1(count)); }
+
+write("# # # # #");
+
+for count = 1 to number + 1 do {
+    write(fibo2(count)); }
+}

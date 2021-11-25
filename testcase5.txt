@@ -1,0 +1,42 @@
+program Couples;
+vars
+int : listA[5], listB[4], n, i;
+
+
+function int Sum (int: x, y)
+{
+x = x + y;
+return(x);
+}
+
+function int Sub (int: x, y) 
+{
+x = x - y;
+return(x);
+}
+
+function int Mul (int: x, y) 
+{
+x = x * y;
+return(x);
+}
+
+function int Div (int: x, y) 
+{
+x = x / y;
+return(x);
+}
+
+main() {
+read(listA[0]);
+read(listA[1]);
+read(listA[2]);
+read(listA[3]);
+read(listA[4]);
+
+n = 4;
+
+for i = 0 to n do {
+        listB[i] = Sum(listA[i], listA[i+1]); 
+        write(listB[i]); } 
+}

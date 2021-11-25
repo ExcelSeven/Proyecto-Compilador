@@ -1,0 +1,48 @@
+program test;
+vars
+int : word, anotherone, par;
+float: more[5], here;
+char : character;
+
+function void nope (float : lol; int: ok) 
+vars
+float : aight;
+{
+aight = lol - 4.2;
+write(aight);
+}
+
+function int pog (int: champ) 
+{
+champ = champ + 2;
+return(champ);
+}
+
+main() {
+word = 3;
+anotherone = 30;
+character = 'a';
+more[1] = 30.5;
+here = 20;
+
+par = word + anotherone;			
+
+if(word < anotherone) then {
+	word = word * 5; }				
+else {
+	anotherone = anotherone / 5; }
+
+while (word < anotherone) do {
+	word = word + 1; }
+
+for word = 1 to 10 do {
+	par = par + 1; }
+
+nope(here, 3*5);
+
+word = pog(anotherone);
+
+read(word);
+
+write("haha", word);
+}

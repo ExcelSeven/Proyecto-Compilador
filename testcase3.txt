@@ -1,0 +1,23 @@
+program Sort;
+vars
+int : list[5], n, i, j, temp;
+
+main() {
+n = 5;
+
+read(list[0]);
+read(list[1]);
+read(list[2]);
+read(list[3]);
+read(list[4]); 
+
+for i = 0 to n do {
+    for j = 0 to n-i-1 do {
+        if (list[j] > list[j+1]) then {
+            temp = list[j];
+            list[j] = list[j+1]; 
+            list[j+1] = temp; } } }
+
+for i = 0 to n do {
+        write(list[i]); } }
+

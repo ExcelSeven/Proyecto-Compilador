@@ -1,0 +1,36 @@
+program Factorial;
+vars
+int : number, result;
+
+function int fact1 (int: n) 
+{
+if (n < 2) then {
+    return(1); }
+else {
+    return(n * fact1(n - 1)); }
+}
+
+function int fact2 (int: n) 
+vars
+int : count, fact;
+{
+    fact = 1;
+    if (n < 2) then {
+        return(1); }
+    for count = 2 to n + 1 do {
+    fact = fact * count;}
+return(fact);
+}
+
+main() {
+read(number);
+
+result = fact1(number);
+write(result);
+
+write("# # # # #");
+
+result = fact2(number);
+write(result);
+
+}

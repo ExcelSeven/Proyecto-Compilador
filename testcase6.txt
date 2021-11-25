@@ -1,0 +1,30 @@
+program Special;
+vars
+int : listA[5], listB[5], med, mod, var;
+
+main() {
+read(listA[0]);
+read(listA[1]);
+read(listA[2]);
+read(listA[3]);
+read(listA[4]);
+
+med = media(listA);
+write(med);
+
+mod = moda(listA);
+write(mod);
+
+var = varianza(listA);
+write(var);
+
+read(listB[0]);
+read(listB[1]);
+read(listB[2]);
+read(listB[3]);
+read(listB[4]);
+
+regresion(listA, listB);
+
+plot(listA, listB);
+}

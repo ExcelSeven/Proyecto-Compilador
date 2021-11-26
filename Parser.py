@@ -816,9 +816,9 @@ def p_factor(p):
               | MINUS C_INT pushintn
               | C_FLOAT pushfloat
               | MINUS C_FLOAT pushfloatn
-              | C_CHAR pushchar 
+              | C_CHAR pushchar
               | ID pushid
-              | ID pushid LBRACK exprs RBRACK verif
+              | ID pushid LBRACK expr RBRACK verif
               | ID call LPAREN RPAREN confirm
               | ID call exprp confirm
               | special1 exprp sconfirm1'''
@@ -839,6 +839,7 @@ def p_sconfirm1(p):
     else:
         if rType == "char":
             print("Called special function %s with a non-numerical array." % p[-2])
+            sys.exit(0)
         else: 
             quads.append([29, get_key(functionDirectory[Passage.currentFunction].varTable[rOp].size), -1, functionDirectory[Passage.currentFunction].varTable[rOp].dir])
             Passage.currentQuad += 1
@@ -1015,7 +1016,7 @@ def p_pams(p):
                 sys.exit(0)
             else:
                 if rOp in conTable.values():
-                    quads.append([21, get_key(rOp), -1, "p%s" % (Passage.paramCount)])
+                    quads.append([21, get_key(rOp), -1, functionDirectory[Passage.paramFun].params[Passage.paramCount-1]])
                 else:
                     quads.append([21, functionDirectory[Passage.currentFunction].varTable[rOp].dir, -1, functionDirectory[Passage.paramFun].params[Passage.paramCount-1]])
                 Passage.currentQuad += 1

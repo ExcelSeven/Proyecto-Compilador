@@ -122,7 +122,7 @@ Rule 116   factor -> C_FLOAT pushfloat
 Rule 117   factor -> MINUS C_FLOAT pushfloatn
 Rule 118   factor -> C_CHAR pushchar
 Rule 119   factor -> ID pushid
-Rule 120   factor -> ID pushid LBRACK exprs RBRACK verif
+Rule 120   factor -> ID pushid LBRACK expr RBRACK verif
 Rule 121   factor -> ID call LPAREN RPAREN confirm
 Rule 122   factor -> ID call exprp confirm
 Rule 123   factor -> special1 exprp sconfirm1
@@ -217,9 +217,9 @@ dimvars              : 19 20
 elsequad             : 76
 endfunc              : 1 2 3 4 30 31 32 33
 endquad              : 80
-expr                 : 21 65 66 99 100 105 106
+expr                 : 21 65 66 99 100 105 106 120
 exprp                : 56 58 101 102 122 123
-exprs                : 53 54 54 62 71 72 87 87 88 88 89 89 90 90 91 91 92 92 94 94 94 100 102 103 120
+exprs                : 53 54 54 62 71 72 87 87 88 88 89 89 90 90 91 91 92 92 94 94 94 100 102 103
 factor               : 108 109 110
 filljump             : 75 76
 forquad1             : 94
@@ -1222,7 +1222,7 @@ state 54
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -1445,7 +1445,7 @@ state 76
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -1487,7 +1487,7 @@ state 77
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -1534,7 +1534,7 @@ state 78
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -1591,7 +1591,7 @@ state 79
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -1835,7 +1835,7 @@ state 89
 state 90
 
     (119) factor -> ID . pushid
-    (120) factor -> ID . pushid LBRACK exprs RBRACK verif
+    (120) factor -> ID . pushid LBRACK expr RBRACK verif
     (121) factor -> ID . call LPAREN RPAREN confirm
     (122) factor -> ID . call exprp confirm
     (128) pushid -> .
@@ -2063,7 +2063,7 @@ state 105
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -2108,7 +2108,7 @@ state 106
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -2188,7 +2188,7 @@ state 110
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -2338,7 +2338,7 @@ state 120
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -2666,7 +2666,7 @@ state 134
 state 135
 
     (119) factor -> ID pushid .
-    (120) factor -> ID pushid . LBRACK exprs RBRACK verif
+    (120) factor -> ID pushid . LBRACK expr RBRACK verif
 
     TIMES           reduce using rule 119 (factor -> ID pushid .)
     DIVIDE          reduce using rule 119 (factor -> ID pushid .)
@@ -2787,7 +2787,7 @@ state 142
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -3097,7 +3097,7 @@ state 162
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -3149,7 +3149,7 @@ state 163
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -3195,7 +3195,7 @@ state 164
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -3240,7 +3240,7 @@ state 165
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -3285,7 +3285,7 @@ state 166
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -3330,7 +3330,7 @@ state 167
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -3375,7 +3375,7 @@ state 168
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -3420,7 +3420,7 @@ state 169
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -3472,7 +3472,7 @@ state 171
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -3517,7 +3517,7 @@ state 172
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -3554,7 +3554,7 @@ state 173
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -3587,7 +3587,7 @@ state 174
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -3628,7 +3628,7 @@ state 175
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -3662,7 +3662,7 @@ state 176
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -3691,7 +3691,7 @@ state 177
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -3763,15 +3763,10 @@ state 179
 
 state 180
 
-    (120) factor -> ID pushid LBRACK . exprs RBRACK verif
-    (99) exprs -> . expr pams
-    (100) exprs -> . expr pams COMMA exprs
-    (101) exprs -> . exprp pams
-    (102) exprs -> . exprp pams COMMA exprs
+    (120) factor -> ID pushid LBRACK . expr RBRACK verif
     (105) expr -> . expr PLUS pushop term quad1
     (106) expr -> . expr MINUS pushop term quad1
     (107) expr -> . term quad1
-    (103) exprp -> . LPAREN pushop exprs RPAREN popop
     (108) term -> . term TIMES pushop factor quad2
     (109) term -> . term DIVIDE pushop factor quad2
     (110) term -> . factor quad2
@@ -3781,7 +3776,7 @@ state 180
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -3789,7 +3784,6 @@ state 180
     (125) special1 -> . MODA
     (126) special1 -> . VARIANZA
 
-    LPAREN          shift and go to state 75
     C_INT           shift and go to state 87
     MINUS           shift and go to state 85
     C_FLOAT         shift and go to state 88
@@ -3799,9 +3793,7 @@ state 180
     MODA            shift and go to state 93
     VARIANZA        shift and go to state 94
 
-    exprs                          shift and go to state 222
-    expr                           shift and go to state 82
-    exprp                          shift and go to state 83
+    expr                           shift and go to state 222
     term                           shift and go to state 84
     factor                         shift and go to state 86
     special1                       shift and go to state 91
@@ -4128,7 +4120,7 @@ state 201
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -4191,7 +4183,7 @@ state 203
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -4242,7 +4234,7 @@ state 204
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -4535,9 +4527,13 @@ state 221
 
 state 222
 
-    (120) factor -> ID pushid LBRACK exprs . RBRACK verif
+    (120) factor -> ID pushid LBRACK expr . RBRACK verif
+    (105) expr -> expr . PLUS pushop term quad1
+    (106) expr -> expr . MINUS pushop term quad1
 
     RBRACK          shift and go to state 257
+    PLUS            shift and go to state 123
+    MINUS           shift and go to state 124
 
 
 state 223
@@ -4953,7 +4949,7 @@ state 256
 
 state 257
 
-    (120) factor -> ID pushid LBRACK exprs RBRACK . verif
+    (120) factor -> ID pushid LBRACK expr RBRACK . verif
     (134) verif -> .
 
     TIMES           reduce using rule 134 (verif -> .)
@@ -5065,7 +5061,7 @@ state 264
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -5172,7 +5168,7 @@ state 267
     (117) factor -> . MINUS C_FLOAT pushfloatn
     (118) factor -> . C_CHAR pushchar
     (119) factor -> . ID pushid
-    (120) factor -> . ID pushid LBRACK exprs RBRACK verif
+    (120) factor -> . ID pushid LBRACK expr RBRACK verif
     (121) factor -> . ID call LPAREN RPAREN confirm
     (122) factor -> . ID call exprp confirm
     (123) factor -> . special1 exprp sconfirm1
@@ -5199,27 +5195,27 @@ state 267
 
 state 268
 
-    (120) factor -> ID pushid LBRACK exprs RBRACK verif .
+    (120) factor -> ID pushid LBRACK expr RBRACK verif .
 
-    TIMES           reduce using rule 120 (factor -> ID pushid LBRACK exprs RBRACK verif .)
-    DIVIDE          reduce using rule 120 (factor -> ID pushid LBRACK exprs RBRACK verif .)
-    PLUS            reduce using rule 120 (factor -> ID pushid LBRACK exprs RBRACK verif .)
-    MINUS           reduce using rule 120 (factor -> ID pushid LBRACK exprs RBRACK verif .)
-    COMMA           reduce using rule 120 (factor -> ID pushid LBRACK exprs RBRACK verif .)
-    EQUALS          reduce using rule 120 (factor -> ID pushid LBRACK exprs RBRACK verif .)
-    RPAREN          reduce using rule 120 (factor -> ID pushid LBRACK exprs RBRACK verif .)
-    GREATER         reduce using rule 120 (factor -> ID pushid LBRACK exprs RBRACK verif .)
-    GREATER_EQ      reduce using rule 120 (factor -> ID pushid LBRACK exprs RBRACK verif .)
-    LESSER          reduce using rule 120 (factor -> ID pushid LBRACK exprs RBRACK verif .)
-    LESSER_EQ       reduce using rule 120 (factor -> ID pushid LBRACK exprs RBRACK verif .)
-    COMPARE         reduce using rule 120 (factor -> ID pushid LBRACK exprs RBRACK verif .)
-    DIFFERENT       reduce using rule 120 (factor -> ID pushid LBRACK exprs RBRACK verif .)
-    SEMI            reduce using rule 120 (factor -> ID pushid LBRACK exprs RBRACK verif .)
-    RBRACK          reduce using rule 120 (factor -> ID pushid LBRACK exprs RBRACK verif .)
-    AND             reduce using rule 120 (factor -> ID pushid LBRACK exprs RBRACK verif .)
-    OR              reduce using rule 120 (factor -> ID pushid LBRACK exprs RBRACK verif .)
-    TO              reduce using rule 120 (factor -> ID pushid LBRACK exprs RBRACK verif .)
-    DO              reduce using rule 120 (factor -> ID pushid LBRACK exprs RBRACK verif .)
+    TIMES           reduce using rule 120 (factor -> ID pushid LBRACK expr RBRACK verif .)
+    DIVIDE          reduce using rule 120 (factor -> ID pushid LBRACK expr RBRACK verif .)
+    PLUS            reduce using rule 120 (factor -> ID pushid LBRACK expr RBRACK verif .)
+    MINUS           reduce using rule 120 (factor -> ID pushid LBRACK expr RBRACK verif .)
+    COMMA           reduce using rule 120 (factor -> ID pushid LBRACK expr RBRACK verif .)
+    EQUALS          reduce using rule 120 (factor -> ID pushid LBRACK expr RBRACK verif .)
+    RPAREN          reduce using rule 120 (factor -> ID pushid LBRACK expr RBRACK verif .)
+    GREATER         reduce using rule 120 (factor -> ID pushid LBRACK expr RBRACK verif .)
+    GREATER_EQ      reduce using rule 120 (factor -> ID pushid LBRACK expr RBRACK verif .)
+    LESSER          reduce using rule 120 (factor -> ID pushid LBRACK expr RBRACK verif .)
+    LESSER_EQ       reduce using rule 120 (factor -> ID pushid LBRACK expr RBRACK verif .)
+    COMPARE         reduce using rule 120 (factor -> ID pushid LBRACK expr RBRACK verif .)
+    DIFFERENT       reduce using rule 120 (factor -> ID pushid LBRACK expr RBRACK verif .)
+    SEMI            reduce using rule 120 (factor -> ID pushid LBRACK expr RBRACK verif .)
+    RBRACK          reduce using rule 120 (factor -> ID pushid LBRACK expr RBRACK verif .)
+    AND             reduce using rule 120 (factor -> ID pushid LBRACK expr RBRACK verif .)
+    OR              reduce using rule 120 (factor -> ID pushid LBRACK expr RBRACK verif .)
+    TO              reduce using rule 120 (factor -> ID pushid LBRACK expr RBRACK verif .)
+    DO              reduce using rule 120 (factor -> ID pushid LBRACK expr RBRACK verif .)
 
 
 state 269

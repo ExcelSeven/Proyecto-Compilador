@@ -1,6 +1,5 @@
 semanticCube = dict()
 
-#Int
 semanticCube[("+", "int", "int")]        = "int"
 semanticCube[("-", "int", "int")]        = "int"
 semanticCube[("*", "int", "int")]        = "int"
@@ -57,7 +56,6 @@ semanticCube[(">", "int", "bool")]       = "ERROR"
 semanticCube[("<=", "int", "bool")]      = "ERROR"
 semanticCube[(">=", "int", "bool")]      = "ERROR"
 
-#Float
 semanticCube[("+", "float", "int")]      = "float"
 semanticCube[("-", "float", "int")]      = "float"
 semanticCube[("*", "float", "int")]      = "float"
@@ -114,7 +112,6 @@ semanticCube[(">", "float", "bool")]     = "ERROR"
 semanticCube[("<=", "float", "bool")]    = "ERROR"
 semanticCube[(">=", "float", "bool")]    = "ERROR"
 
-#Char
 semanticCube[("+", "char", "int")]       = "ERROR"
 semanticCube[("-", "char", "int")]       = "ERROR"
 semanticCube[("*", "char", "int")]       = "ERROR"
@@ -171,7 +168,6 @@ semanticCube[(">", "char", "bool")]      = "ERROR"
 semanticCube[("<=", "char", "bool")]     = "ERROR"
 semanticCube[(">=", "char", "bool")]     = "ERROR"
 
-#Bool
 semanticCube[("+", "bool", "int")]       = "ERROR"
 semanticCube[("-", "bool", "int")]       = "ERROR"
 semanticCube[("*", "bool", "int")]       = "ERROR"

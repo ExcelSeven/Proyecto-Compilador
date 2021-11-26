@@ -10,6 +10,11 @@ else {
     return(n * fact1(n - 1)); }
 }
 
+function int patito (int: o)
+{
+    return(fact1(o*2)*2);
+}
+
 function int fact2 (int: n) 
 vars
 int : count, fact;
@@ -25,7 +30,7 @@ return(fact);
 main() {
 read(number);
 
-result = fact1(number);
+result = patito(3);
 write(result);
 
 write("# # # # #");

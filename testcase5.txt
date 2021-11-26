@@ -37,6 +37,6 @@ read(listA[4]);
 n = 4;
 
 for i = 0 to n do {
-        listB[i] = Sum(listA[i], listA[i+1]); 
+        listB[i] = Div(listA[i], listA[i+1]); 
         write(listB[i]); } 
 }
